@@ -1,8 +1,8 @@
 VPATH		= ./obj:./src:
-SRC			= megaphone.cpp
+SRC			= Phonebook.cpp Contact.cpp main.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= megaphone
-CFLAGS		=	-Wall -Werror -Wextra -std=c++98 -pedantic # -g -fsanitize=address
+NAME		= phonebook
+CFLAGS		=	-Wall -Werror -Wextra -std=c++98 # -g -fsanitize=address
 CC			=	c++
 
 all:		$(NAME)

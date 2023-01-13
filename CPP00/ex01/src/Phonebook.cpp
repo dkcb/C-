@@ -1,19 +1,46 @@
-#include "phonebook.hpp"
+#include <iostream>
+#include "PhoneBook.hpp"
 
-int	main( int argc, char **argv ) {
-	int	i = 1;
+PhoneBook::PhoneBook( )
+{
 
-	if (argc <= 1)
-	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return 1;
-	}
-	while (argv[i])
-	{
-		for (int j = 0; argv[i][j]; j++)
-			std::cout << (char)std::toupper(argv[i][j]);
-		i++;
-	}
-	std::cout << std::endl;
-	return 0;
 }
+PhoneBook::~PhoneBook( )
+{
+
+}
+
+std::string	PhoneBook::Input( ) {
+
+	std::string			buffer;
+
+	while (buffer.empty())
+	{
+		std::getline(std::cin, buffer);
+		if (buffer.find_first_not_of("1234567890") != std::string::npos)
+			buffer.clear();
+		else
+			break ;
+		// if (buffer.empty())
+		// 	continue ;
+
+	}
+	return buffer;
+}
+
+// int main ( ){
+// 	PhoneBook	pb;
+// 	string		cmd;
+	
+// 	int	i = 1;
+
+// 	cmd = pb.Input();
+// 	while (i < 10)
+// 	{
+// 		for (int j = 0; j < 10; j++)
+// 			cout << "YO";
+// 		i++;
+// 	}
+// 	cout << endl;
+// 	return 0;
+// }

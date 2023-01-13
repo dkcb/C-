@@ -1,6 +1,15 @@
-#include "phonebook.hpp"
+#include "Contact.hpp"
 
-int	main( int argc, char **argv ) {
+Contact::Contact( )
+{
+
+}
+Contact::~Contact( )
+{
+
+}
+
+int	Contact( int argc, char **argv ) {
 	int	i = 1;
 
 	if (argc <= 1)
