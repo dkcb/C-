@@ -8,13 +8,15 @@ class PhoneBook {
 public:
 	std::string		Input( );
 	std::int8_t		Menu( );
-					PhoneBook( );
-					~PhoneBook( );
-	
+	int				total;
+	Contact	c[8];
+	std::int8_t	ContactAdd(Contact *c);
+
+	PhoneBook( );
+	~PhoneBook( );
+
 	int				num;
 
 private:
-	int				total;
-	Contact	c[8];
 };
 #endif

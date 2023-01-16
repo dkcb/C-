@@ -6,14 +6,17 @@
 class Contact {
 	public:
 
-					Contact( );
-					~Contact( );
-	int				num;
+				Contact( );
+				~Contact( );
+	// int				num;
+	int			total;
+	std::string	FirstName;
+	std::string	LastName;
+	std::string	NickName;
+	std::string	PhoneNumber; 
+	std::string	DarkestSecret;
 
 private:
 
-	int				total;
-	std::string		Name;
-	std::string		Number;
 };
 #endif
