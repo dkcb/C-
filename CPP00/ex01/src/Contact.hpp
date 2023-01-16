@@ -5,9 +5,8 @@
 
 class Contact {
 	public:
-
-				Contact( );
-				~Contact( );
+		Contact( );
+		~Contact( );
 	// int				num;
 	int			total;
 	std::string	FirstName;

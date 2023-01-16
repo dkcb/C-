@@ -1,7 +1,8 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
-#include <iostream>
-#include "Contact.hpp"
+# include <iostream>
+# include "Contact.hpp"
+# define MAX_CONTACTS 8
 
 class PhoneBook {
 
@@ -11,6 +12,8 @@ public:
 	int				total;
 	Contact	c[8];
 	std::int8_t	ContactAdd(Contact *c);
+	std::int8_t	ContactSearch(Contact *c, std::int8_t num);
+
 
 	PhoneBook( );
 	~PhoneBook( );
