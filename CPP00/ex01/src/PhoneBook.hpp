@@ -3,12 +3,11 @@
 #include <iostream>
 #include "Contact.hpp"
 
-// using namespace std;
-
 class PhoneBook {
 
 public:
 	std::string		Input( );
+	std::int8_t		Menu( );
 					PhoneBook( );
 					~PhoneBook( );
 	

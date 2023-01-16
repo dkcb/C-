@@ -6,7 +6,6 @@
 class Contact {
 	public:
 
-	std::string		prompt;
 					Contact( );
 					~Contact( );
 	int				num;
@@ -14,5 +13,7 @@ class Contact {
 private:
 
 	int				total;
+	std::string		Name;
+	std::string		Number;
 };
 #endif
