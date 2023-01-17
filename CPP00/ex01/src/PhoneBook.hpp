@@ -12,6 +12,7 @@ public:
 	int				total;
 	Contact	c[8];
 	std::int8_t	ContactAdd(Contact *c);
+	std::int8_t	ContactPopulate(Contact *c);
 	std::int8_t	ContactSearch(Contact *c, std::int8_t num);
 
 

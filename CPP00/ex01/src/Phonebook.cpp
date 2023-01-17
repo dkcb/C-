@@ -25,7 +25,7 @@ std::int8_t	PhoneBook::ContactAdd(Contact *c) {
 	buffer.clear();
 	while (buffer.empty())
 	{
-		std::cout << "Telephone number:";
+		std::cout << "Phone number:";
 		std::getline(std::cin, buffer);
 		if (buffer.find_first_not_of("1234567890") != std::string::npos)
 			buffer.clear();
@@ -38,19 +38,32 @@ std::int8_t	PhoneBook::ContactAdd(Contact *c) {
 	return -1;
 }
 
+std::int8_t	PhoneBook::ContactPopulate(Contact *c) {
+	std::string	buffer;
+	std::int8_t	i = 0;
+
+	while (i < MAX_CONTACTS)
+	{
+		c[i].FirstName = "FName" + std::to_string(i);
+		c[i].LastName = "LName" + std::to_string(i);
+		c[i].NickName = "NName" + std::to_string(i);
+		c[i].PhoneNumber = std::to_string(i);
+		c[i].DarkestSecret = "DS" + std::to_string(i);
+		i++;
+	}
+	return 0;
+}
 std::int8_t	PhoneBook::ContactSearch(Contact *c, std::int8_t num) {
 
 	std::string	buffer;
+	std::int8_t	i = 0;
 
-	while (buffer.empty())
+	while (i < MAX_CONTACTS && i <= num)
 	{
-		std::getline(std::cin, buffer);
-		if (buffer.compare ("EXIT") == 0)
-			return 0;
-		if (buffer.compare ("ADD") == 0)
-			return 1;
-		if (buffer.compare ("SEARCH") == 0)
-			return 2;
+		std::cout << "Index: " << std::to_string(i) << " First name: " << c[i].FirstName << " Last name:" << c[i].LastName << " Nickname: " << c[i].NickName << std::endl;
+		// std::cout << "Phone number:" << c[i].PhoneNumber << std::endl;
+		// std::cout << "Darkest secret:" << c[i].DarkestSecret << std::endl;
+		i++;
 	}
 	return -1;
 }
