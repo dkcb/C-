@@ -10,32 +10,23 @@ PhoneBook::~PhoneBook( )
 
 }
 
-std::int8_t	PhoneBook::ContactAdd(Contact *c) {
-
+std::string	PhoneBook::Input(std::string s) {
 	std::string	buffer;
-	std::int8_t	i;
-
-	std::cout << "ADDING NEW CONTACT:" << std::endl;
-	std::cout << "First name:";
-	std::getline(std::cin, buffer);
-	c->FirstName = buffer;
-	std::cout << "Last name:";
-	std::getline(std::cin, buffer);
-	c->LastName = buffer;
-	buffer.clear();
+	
+	std::cout << s;
 	while (buffer.empty())
-	{
-		std::cout << "Phone number:";
 		std::getline(std::cin, buffer);
-		if (buffer.find_first_not_of("1234567890") != std::string::npos)
-			buffer.clear();
-		else
-			c->PhoneNumber = buffer;
-	}
-	std::cout << "Darkest secret:";
-	std::getline(std::cin, buffer);
-	c->NickName = buffer;
-	return -1;
+	return buffer;
+
+}
+void PhoneBook::ContactAdd(Contact *c) {
+	std::cout << "ADDING NEW CONTACT:" << std::endl;
+	c->FirstName = PhoneBook::Input("First name:");
+	c->LastName = PhoneBook::Input("Last name:");
+	while (PhoneBook::Input("Phone number:").find_first_not_of("1234567890") != std::string::npos)
+	while (c->PhoneNumber.find_first_not_of("1234567890") != std::string::npos)
+		c->PhoneNumber = PhoneBook::Input();
+	c->NickName = PhoneBook::Input("Darkest secret:");
 }
 
 std::int8_t	PhoneBook::ContactPopulate(Contact *c) {
@@ -58,9 +49,9 @@ std::int8_t	PhoneBook::ContactSearch(Contact *c, std::int8_t num) {
 	std::string	buffer;
 	std::int8_t	i = 0;
 
-	while (i < MAX_CONTACTS && i <= num)
+	while (i < MAX_CONTACTS && i < num)
 	{
-		std::cout << "Index: " << std::to_string(i) << " First name: " << c[i].FirstName << " Last name:" << c[i].LastName << " Nickname: " << c[i].NickName << std::endl;
+		std::cout << "Index: " << std::to_string(i % (MAX_CONTACTS)) << " First name: " << c[i % (MAX_CONTACTS)].FirstName << " Last name:" << c[i % (MAX_CONTACTS)].LastName << " Nickname: " << c[i % (MAX_CONTACTS)].NickName << std::endl;
 		// std::cout << "Phone number:" << c[i].PhoneNumber << std::endl;
 		// std::cout << "Darkest secret:" << c[i].DarkestSecret << std::endl;
 		i++;
