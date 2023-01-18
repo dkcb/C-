@@ -1,28 +1,53 @@
 #include "Contact.hpp"
 
-Contact::Contact( )
-{
+Contact::Contact( ){}
 
+Contact::~Contact( ){}
+
+std::string	Contact::getFN( ){
+	return this->_FirstName;
 }
-Contact::~Contact( )
-{
 
+std::string	Contact::getLN( ) {
+	return this->_LastName;
 }
 
-int	Contact( int argc, char **argv ) {
-	int	i = 1;
+std::string	Contact::getNN( ){
+	return this->_NickName;
+}
 
-	if (argc <= 1)
-	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return 1;
-	}
-	while (argv[i])
-	{
-		for (int j = 0; argv[i][j]; j++)
-			std::cout << (char)std::toupper(argv[i][j]);
-		i++;
-	}
-	std::cout << std::endl;
-	return 0;
+std::string	Contact::getPN( ){
+	return this->_PhoneNumber;
+}
+
+std::string	Contact::getDS( ){
+	return this->_DarkestSecret;
+}
+
+int	Contact::get_total( ) {
+	return this->_total;
+}
+
+void	Contact::setFN(std::string s) {
+		this->_FirstName = s;
+}
+
+void	Contact::setLN(std::string s) {
+	this->_LastName = s;
+}
+
+void	Contact::setNN(std::string s) {
+	 this->_NickName = s;
+}
+
+void	Contact::setPN(std::string s) {
+	this->_PhoneNumber = s;
+}
+
+void	Contact::setDS(std::string s) {
+	 this->_DarkestSecret = s;
+}
+
+void	Contact::set_total(int i) {
+	this->_total = i;
 }

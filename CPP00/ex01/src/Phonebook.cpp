@@ -1,13 +1,14 @@
 #include <iostream>
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook( )
-{
+PhoneBook::PhoneBook( ){}
 
-}
-PhoneBook::~PhoneBook( )
-{
+PhoneBook::~PhoneBook( ){}
 
+std::string	PhoneBook::Cut(std::string s, int i) {
+	if (s.size() > 9)
+		return (s.substr(0, i - 1) + ".");
+	return s.substr(0, i);
 }
 
 std::string	PhoneBook::Input(std::string s) {
@@ -21,12 +22,12 @@ std::string	PhoneBook::Input(std::string s) {
 }
 void PhoneBook::ContactAdd(Contact *c) {
 	std::cout << "ADDING NEW CONTACT:" << std::endl;
-	c->FirstName = PhoneBook::Input("First name:");
-	c->LastName = PhoneBook::Input("Last name:");
-	while (PhoneBook::Input("Phone number:").find_first_not_of("1234567890") != std::string::npos)
-	while (c->PhoneNumber.find_first_not_of("1234567890") != std::string::npos)
-		c->PhoneNumber = PhoneBook::Input();
-	c->NickName = PhoneBook::Input("Darkest secret:");
+	c->setFN(PhoneBook::Input("First name:"));
+	c->setLN(PhoneBook::Input("Last name:"));
+	c->setPN("l");
+	while (c->getPN().find_first_not_of("1234567890") != std::string::npos)
+		c->setPN (PhoneBook::Input("Phone number:"));
+	c->setNN(PhoneBook::Input("Darkest secret:"));
 }
 
 std::int8_t	PhoneBook::ContactPopulate(Contact *c) {
@@ -35,27 +36,40 @@ std::int8_t	PhoneBook::ContactPopulate(Contact *c) {
 
 	while (i < MAX_CONTACTS)
 	{
-		c[i].FirstName = "FName" + std::to_string(i);
-		c[i].LastName = "LName" + std::to_string(i);
-		c[i].NickName = "NName" + std::to_string(i);
-		c[i].PhoneNumber = std::to_string(i);
-		c[i].DarkestSecret = "DS" + std::to_string(i);
+		c[i].setFN("FName" + std::to_string(i));
+		c[i].setLN("LName" + std::to_string(i));
+		c[i].setNN("NName" + std::to_string(i));
+		c[i].setPN(std::to_string(i));
+		c[i].setDS("DS" + std::to_string(i));
 		i++;
 	}
 	return 0;
 }
 std::int8_t	PhoneBook::ContactSearch(Contact *c, std::int8_t num) {
 
-	std::string	buffer;
+	std::string	buffer = "d";
 	std::int8_t	i = 0;
 
+	std::cout << std::setw(WIDTH) << std::right << "Index" << "| "
+			<< std::setw(WIDTH) << std::right << "FirstName" << "| "
+			<< std::setw(WIDTH) << std::right << "LastName" << "| "
+			<< std::setw(WIDTH) << std::right << "Nickname"  << std::endl;
 	while (i < MAX_CONTACTS && i < num)
 	{
-		std::cout << "Index: " << std::to_string(i % (MAX_CONTACTS)) << " First name: " << c[i % (MAX_CONTACTS)].FirstName << " Last name:" << c[i % (MAX_CONTACTS)].LastName << " Nickname: " << c[i % (MAX_CONTACTS)].NickName << std::endl;
-		// std::cout << "Phone number:" << c[i].PhoneNumber << std::endl;
-		// std::cout << "Darkest secret:" << c[i].DarkestSecret << std::endl;
+		std::cout << std::setw(WIDTH) << std::right << i + 0 << "| "
+				  << std::setw(WIDTH) << std::right << Cut(this->c[i].getFN(), WIDTH) << "| "
+				  << std::setw(WIDTH) << std::right << Cut(this->c[i].getLN(), WIDTH) << "| "
+				  << std::setw(WIDTH) << std::right << Cut(this->c[i].getNN(), WIDTH) << std::endl;
 		i++;
 	}
+	while (buffer.find_first_not_of("1234567890") != std::string::npos || std::stoi(buffer) < 0 || std::stoi(buffer) > num - 1)
+		buffer = PhoneBook::Input("Index of contact to dispay:");
+	i = std::stoi(buffer);
+	std::cout	<< "First name     :" << c[i].getFN() << std::endl
+				<< "Last name      :" << c[i].getLN() << std::endl
+				<< "Nickname       :" << c[i].getNN() << std::endl
+				<< "Phone Number   :" << c[i].getPN() << std::endl
+				<< "Darkest Secret :" << c[i].getDS() << std::endl;
 	return -1;
 }
 
@@ -74,19 +88,4 @@ std::int8_t	PhoneBook::Menu( ) {
 			return 2;
 	}
 	return -1;
-}
-
-std::string	PhoneBook::Input( ) {
-
-	std::string	buffer;
-
-	while (buffer.empty())
-	{
-		std::getline(std::cin, buffer);
-		if (buffer.find_first_not_of("1234567890") != std::string::npos)
-			buffer.clear();
-		else
-			break ;
-	}
-	return buffer;
 }

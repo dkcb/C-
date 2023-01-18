@@ -23,7 +23,7 @@ int	main( int argc, char **argv ) {
 			pb.ContactSearch(&pb.c[0], i);
 			// i++;
 		}
-		std::cout << "PN:" << pb.c[i % (MAX_CONTACTS)].PhoneNumber << std::endl;
+		// std::cout << "PN:" << pb.c[i % (MAX_CONTACTS)].getPN() << std::endl;
 	}
 	return 0;
 }
