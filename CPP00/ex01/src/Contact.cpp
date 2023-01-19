@@ -24,10 +24,6 @@ std::string	Contact::getDS( ){
 	return this->_DarkestSecret;
 }
 
-int	Contact::get_total( ) {
-	return this->_total;
-}
-
 void	Contact::setFN(std::string s) {
 		this->_FirstName = s;
 }
@@ -46,8 +42,4 @@ void	Contact::setPN(std::string s) {
 
 void	Contact::setDS(std::string s) {
 	 this->_DarkestSecret = s;
-}
-
-void	Contact::set_total(int i) {
-	this->_total = i;
 }

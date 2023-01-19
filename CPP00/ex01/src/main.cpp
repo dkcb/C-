@@ -6,24 +6,21 @@ int	main( int argc, char **argv ) {
 	int	i = 0;
 	int	m = 1;
 
-	pb.ContactPopulate(&pb.c[0]);
-	i = MAX_CONTACTS;
+	// pb.contactPopulate(pb.getContact());
+	// i = MAX_CONTACTS;
 	while (m)
 	{
 		std::cout << "Phonebook menu. You can 'ADD', 'SEARCH' or 'EXIT':" << std::endl;
-		pb.ContactSearch(&pb.c[0], i);
-		m = pb.Menu( );
+		// pb.contactSearch(pb.getContact(), i);
+		m = pb.menu( );
 		if (m == 1){
-			pb.ContactAdd(&pb.c[i % (MAX_CONTACTS)]);
-			// std::cout << i % (MAX_CONTACTS) << std::endl;
+			pb.contactAdd(&pb.getContact()[i % MAX_CONTACTS]);
 			i++;
 		}
 		if (m == 2){
 			std::cout << "SEARCHING CONTACT:" << std::endl;
-			pb.ContactSearch(&pb.c[0], i);
-			// i++;
+			pb.contactSearch(pb.getContact(), i);
 		}
-		// std::cout << "PN:" << pb.c[i % (MAX_CONTACTS)].getPN() << std::endl;
 	}
 	return 0;
 }

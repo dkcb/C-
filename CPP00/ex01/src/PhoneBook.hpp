@@ -3,27 +3,22 @@
 # include <iomanip>
 # include "Contact.hpp"
 # define MAX_CONTACTS 8
-# define WIDTH 9
+# define WIDTH 10
 
 class PhoneBook {
 
-public:
-	std::string		Input(std::string s);
-	std::int8_t		Menu( );
-	int				total;
-	Contact	c[8];
-	std::string	Input( );
-	std::string	Cut(std::string s, int i);
-	void ContactAdd(Contact *c);
-	std::int8_t	ContactPopulate(Contact *c);
-	std::int8_t	ContactSearch(Contact *c, std::int8_t num);
+	public:
+		PhoneBook( );
+		~PhoneBook( );
+		std::int8_t	menu( );
+		std::int8_t	contactPopulate(Contact *c);
+		std::int8_t	contactSearch(Contact *c, std::int8_t num);
+		Contact 	*getContact( );
+		void 		contactAdd(Contact *c);
 
-
-	PhoneBook( );
-	~PhoneBook( );
-
-	int				num;
-
-private:
+	private:
+		std::string	_input(std::string s);
+		std::string	_cut(std::string s, int i);
+		Contact		_c[8];
 };
 #endif
