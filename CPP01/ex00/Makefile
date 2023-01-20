@@ -1,7 +1,7 @@
 VPATH		= ./obj:./src:
-SRC			= Phonebook.cpp Contact.cpp main.cpp
+SRC			= Zombie.cpp newZombie.cpp randomChump.cpp main.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= phonebook
+NAME		= zombie
 CFLAGS		=	-Wall -Werror -Wextra -std=c++98 # -g -fsanitize=address
 CC			=	c++
 

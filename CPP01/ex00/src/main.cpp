@@ -1,26 +1,15 @@
-#include "PhoneBook.hpp"
+#include "randomChump.hpp"
 
 int	main( int argc, char **argv ) {
-	PhoneBook	pb;
+	Zombie	z;
 	std::string prompt;
 	int	i = 0;
 	int	m = 1;
 
-	// pb.contactPopulate(pb.getContact());
-	// i = MAX_CONTACTS;
-	while (m)
-	{
-		std::cout << "Phonebook menu. You can 'ADD', 'SEARCH' or 'EXIT':" << std::endl;
-		// pb.contactSearch(pb.getContact(), i);
-		m = pb.menu( );
-		if (m == 1){
-			pb.contactAdd(&pb.getContact()[i % MAX_CONTACTS]);
-			i++;
-		}
-		if (m == 2){
-			std::cout << "SEARCHING CONTACT:" << std::endl;
-			pb.contactSearch(pb.getContact(), i);
-		}
-	}
+	std::cout << "Zombies arriving! \n";
+	z.setN("Freddy");
+	z.announce();
+	// Zombie::newZombie();
+	
 	return 0;
 }
