@@ -1,15 +1,5 @@
-#include "newZombie.hpp"
+#include "Zombie.hpp"
 
-NewZombie::NewZombie( ){
-
-}
-NewZombie::~NewZombie( ){
-
-}
-
-Zombie* newZombie( std::string name ){
-	Zombie *z;
-
-	z->setN(name);
-	return z;
+Zombie*	newZombie( std::string name ){
+	return new Zombie(name);
 }

@@ -1,11 +1,8 @@
-#include "randomChump.hpp"
+#include "Zombie.hpp"
 
-	RandomChump::RandomChump(){
-	}
-
-	RandomChump::~RandomChump(){
-	}
-
-	void	RandomChump::randomChump( std::string name ){
-
+	void	randomChump( std::string name ){
+		Zombie z = Zombie(name);
+		
+		z.announce();
+		z.~Zombie();
 	}
