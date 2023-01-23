@@ -1,7 +1,7 @@
 VPATH		= ./obj:./src:
 SRC			= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= zombie
+NAME		= fight
 CFLAGS		=	-Wall -Werror -Wextra -std=c++98 # -g -fsanitize=address
 CC			=	c++
 

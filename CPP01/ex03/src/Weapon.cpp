@@ -9,7 +9,8 @@ Weapon::Weapon( std::string type ) : _type(type){
 Weapon::~Weapon( ){
 }
 
-void	Weapon::setType(std::string s){
+void	Weapon::setType(const std::string & s){
+	
 	 this->_type = s;
 }
 
