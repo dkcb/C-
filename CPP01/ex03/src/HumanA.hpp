@@ -1,15 +1,18 @@
-#ifndef HumanA_HPP
-# define HumanA_HPP
+#ifndef HUMANA_HPP
+# define HUMANA_HPP
 # include <iostream>
+# include "Weapon.hpp"
 
 class HumanA {
 	public:
-		void	setType(std::string s);
-		std::string	getType( );
-				HumanA( );
+				HumanA( std::string name );
 				~HumanA( );
+		void	setType(std::string s);
+		std::string	getName( );
+		void	attack( );
 	private:
-		std::string	_type;
+		std::string	_name;
+		Weapon _w;
 };
 
 #endif

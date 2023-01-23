@@ -1,16 +1,22 @@
-#include "Weapon.hpp"
+#include "HumanA.hpp"
 
-Weapon::Weapon( ): _type("default"){
+HumanA::HumanA( std::string name ) : _name(name){
+
 }
 
-Weapon::~Weapon( ){
-	std::cout << this->_type << ": Hhhh...\n";
+HumanA::~HumanA( ){
+	std::cout << this->_name << " attacks with their " << this->_w.getType() << "\n";
 }
 
-void	Weapon::setType(std::string s){
-	 this->_type = s;
+void	HumanA::attack(){
+	std::cout << this->_name << ": Hhhh...\n";
+
 }
 
-std::string Weapon::getType( ){
-	return this->_type;
+void	HumanA::setType(std::string s){
+	 this->_name = s;
+}
+
+std::string HumanA::getName( ){
+	return this->_name;
 }
