@@ -1,5 +1,5 @@
 VPATH		= ./obj:./src:
-SRC			= Zombie.cpp newZombie.cpp randomChump.cpp main.cpp
+SRC			= Zombie.cpp main.cpp
 OBJ			= $(SRC:.cpp=.o)
 NAME		= zombie
 CFLAGS		=	-Wall -Werror -Wextra -std=c++98 # -g -fsanitize=address
