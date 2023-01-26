@@ -1,7 +1,7 @@
 VPATH		= ./obj:./src:
-SRC			= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+SRC			= main.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= fight
+NAME		= edit
 CFLAGS		=	-Wall -Werror -Wextra -std=c++98 # -g -fsanitize=address
 CC			=	c++
 
@@ -10,7 +10,7 @@ all:		$(NAME)
 $(NAME):	$(OBJ)
 			$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 run:		$(NAME)
-			./$(NAME)
+			./$(NAME) "Makefile" "NAME" "R"
 clean:
 			rm -f $(OBJ)
 
