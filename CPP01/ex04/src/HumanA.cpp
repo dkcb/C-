@@ -15,6 +15,6 @@ void	HumanA::setWeapon( const Weapon & w ) {
 	this->_w = w;
 }
 
-const std::string	HumanA::getName( ){
+std::string HumanA::getName( ){
 	return this->_name;
 }

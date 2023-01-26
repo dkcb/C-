@@ -8,6 +8,7 @@ int main() {
     club.setType("some other type of club");
     bob.attack();
     HumanB jim("Jim");
+    jim.attack();
     jim.setWeapon(club);
     jim.attack();
     club.setType("some third type of club");
