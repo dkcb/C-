@@ -22,7 +22,10 @@ int	main( int argc, char **argv ) {
 			while (!src.eof())
 			{
 				getline (src, line);
-				dest << replace(line, argv[2], argv[3]) << std::endl;
+				if (argv[2][0] != '\0' && line.size() != 0)
+					dest << replace(line, argv[2], argv[3]) << std::endl;
+				if (argv[2][0] == '\0' && line.size() != 0)
+					dest << line << std::endl;
 			}
 			dest.close( );
 			src.close( );

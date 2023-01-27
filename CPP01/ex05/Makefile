@@ -1,7 +1,7 @@
 VPATH		= ./obj:./src:
-SRC			= main.cpp
+SRC			= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= notsed
+NAME		= fight
 CFLAGS		=	-Wall -Werror -Wextra -std=c++98 # -g -fsanitize=address
 CC			=	c++
 
@@ -10,7 +10,7 @@ all:		$(NAME)
 $(NAME):	$(OBJ)
 			$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 run:		$(NAME)
-			./$(NAME) "test" "NAME" "1"
+			./$(NAME)
 clean:
 			rm -f $(OBJ)
 
