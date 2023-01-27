@@ -10,7 +10,7 @@ all:		$(NAME)
 $(NAME):	$(OBJ)
 			$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 run:		$(NAME)
-			./$(NAME) "Makefile" "NAME" "R"
+			./$(NAME) "23" "N" "ABC"
 clean:
 			rm -f $(OBJ)
 
