@@ -5,9 +5,9 @@
 class Zombie {
 	public:
 		void		announce( void );
-		void		setN(std::string s);
+		void		setN( std::string s );
 		std::string	getN( );
-					Zombie( std::string name);
+					Zombie( std::string name );
 					~Zombie( );
 	private:
 		std::string	_name;

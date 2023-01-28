@@ -2,7 +2,6 @@
 
 Zombie::Zombie( std::string name ) : _name(name){
 
-		// std::cout << this->_name << ": BraiiiiiiinnnzzzZ...\n";
 }
 
 Zombie::~Zombie( ){}
@@ -15,7 +14,7 @@ std::string	Zombie::getN( ){
 	return this->_name;
 }
 
-void	Zombie::setN(std::string s){
+void	Zombie::setN( std::string s ){
 	 this->_name = s;
 }
 

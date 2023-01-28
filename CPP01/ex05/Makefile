@@ -1,7 +1,7 @@
 VPATH		= ./obj:./src:
-SRC			= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+SRC			= main.cpp Harl.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= fight
+NAME		= shout
 CFLAGS		=	-Wall -Werror -Wextra -std=c++98 # -g -fsanitize=address
 CC			=	c++
 
