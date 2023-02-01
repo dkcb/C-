@@ -16,21 +16,17 @@ Fixed::Fixed( const Fixed &nb ){
 }
 
 Fixed	&Fixed::operator= ( const Fixed &nb ){
-	std::cout << "Assignation operator called" << std::endl;
+	std::cout << "Copy assignment operator called" << std::endl;
 	this->_whole = nb.getRawBits( );
 	return (*this);
 }
 
-Fixed::Fixed( const Fixed &nb ){
-
-}
-
 Fixed::Fixed( const int i){
-	this->_whole = i;
+	this->_whole = roundf(i * (1 << this->_fractional));
 }
 
 Fixed::Fixed( const float f){
-	this->_whole = (int) f;
+	this->_whole = roundf(f * (1 << this->_fractional));
 }
 
 int		Fixed::getRawBits( void ) const{
@@ -38,17 +34,16 @@ int		Fixed::getRawBits( void ) const{
 	return this->_whole;
 }
 
-std::ostream& operator<<(std::ostream &os, const Fixed &dt)
-{
-	os << dt._whole;
-	return os;
+std::ostream& operator<<(std::ostream &os, const Fixed &dt){
+	return (os << dt.toFloat());
 }
 
 int		Fixed::toInt( void ) const{
-
+	return roundf(this->_whole);
 }
-float	Fixed::toFloat( void ) const{
 
+float	Fixed::toFloat( void ) const{
+	return ((float)this->_whole / (float)(1 << this->_fractional));
 }
 
 void	Fixed::setRawBits( int const raw ){
