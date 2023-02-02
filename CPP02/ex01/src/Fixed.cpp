@@ -3,7 +3,7 @@
 
 Fixed::Fixed(){
 	std::cout << "Default constructor called" << std::endl;
-	this->_whole = 0;
+	_whole = 0;
 }
 
 Fixed::~Fixed(){
@@ -21,21 +21,21 @@ Fixed	&Fixed::operator= ( const Fixed &nb ){
 	return (*this);
 }
 
+std::ostream& operator<<(std::ostream &os, const Fixed &dt){
+	return (os << dt.toFloat());
+}
+
 Fixed::Fixed( const int i){
-	this->_whole = roundf(i * (1 << this->_fractional));
+	_whole = roundf(i * (1 << _fractional));
 }
 
 Fixed::Fixed( const float f){
-	this->_whole = roundf(f * (1 << this->_fractional));
+	_whole = roundf(f * (1 << _fractional));
 }
 
 int		Fixed::getRawBits( void ) const{
 	std::cout << "GetRawBits called" << std::endl;
-	return this->_whole;
-}
-
-std::ostream& operator<<(std::ostream &os, const Fixed &dt){
-	return (os << dt.toFloat());
+	return _whole;
 }
 
 int		Fixed::toInt( void ) const{
@@ -43,11 +43,11 @@ int		Fixed::toInt( void ) const{
 }
 
 float	Fixed::toFloat( void ) const{
-	return ((float)this->_whole / (float)(1 << this->_fractional));
+	return ((float)_whole / (float)(1 << _fractional));
 }
 
 void	Fixed::setRawBits( int const raw ){
 	std::cout << "SetRawBits called" << std::endl;
-	this->_whole = raw;
-	std::cout << "RawBits have been set to:" << this->_whole << std::endl;
+	_whole = raw;
+	std::cout << "RawBits have been set to:" << _whole << std::endl;
 }

@@ -3,7 +3,6 @@
 # include <iostream>
 # include <cmath>
 
-
 class Fixed {
 	public:
 							Fixed(  );
@@ -21,6 +20,5 @@ class Fixed {
 		int					_whole;
 		static const int	_fractional = 8;
 };
-// std::ostream &operator << (std::ostream &os, const Fixed &dt);
 
 #endif
