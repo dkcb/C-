@@ -39,7 +39,7 @@ std::ostream& operator<<(std::ostream &os, const Fixed &dt){
 }
 
 int		Fixed::toInt( void ) const{
-	return roundf(this->_whole);
+	return _whole >> _fractional;
 }
 
 float	Fixed::toFloat( void ) const{
