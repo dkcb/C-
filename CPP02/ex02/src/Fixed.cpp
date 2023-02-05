@@ -10,14 +10,14 @@ Fixed::~Fixed(){
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed::Fixed( const Fixed &nb ){
+Fixed::Fixed( const Fixed &fixed ){
 	std::cout << "Copy constructor called" << std::endl;
-	*this = nb;
+	*this = fixed;
 }
 
-Fixed	&Fixed::operator= ( const Fixed &nb ){
+Fixed	&Fixed::operator= ( const Fixed &fixed ){
 	std::cout << "Copy assignment operator called" << std::endl;
-	_whole = nb.getRawBits( );
+	_whole = fixed.getRawBits( );
 	return (*this);
 }
 
@@ -31,6 +31,60 @@ Fixed::Fixed( const int i){
 
 Fixed::Fixed( const float f){
 	_whole = roundf(f * (1 << _fractional));
+}
+
+bool	Fixed::operator> ( const Fixed &fixed ) const{
+	return (_whole > fixed._whole);
+}
+
+bool	Fixed::operator< ( const Fixed &fixed ) const{
+	return (_whole < fixed._whole);
+}
+
+bool	Fixed::operator>= ( const Fixed &fixed ) const{
+	return (_whole >= fixed._whole);
+}
+
+bool	Fixed::operator<= ( const Fixed &fixed ) const{
+	return (_whole <= fixed._whole);
+}
+
+bool	Fixed::operator== ( const Fixed &fixed ) const{
+	return (_whole == fixed._whole);
+}
+
+bool	Fixed::operator!= ( const Fixed &fixed ) const{
+	return (_whole != fixed._whole);
+}
+
+Fixed	Fixed::operator++ (int){
+	Fixed	tmp;
+
+	tmp._whole = _whole;
+	_whole++;
+	return tmp;
+}
+
+Fixed	Fixed::operator-- (int){
+	Fixed	tmp;
+
+	tmp._whole = _whole;
+	_whole--;
+	return tmp;
+}
+
+Fixed	Fixed::operator+ (const Fixed &fixed) const{
+	Fixed tmp;
+
+	tmp._whole += fixed._whole;
+	return tmp;
+}
+
+Fixed	Fixed::operator- (const Fixed &fixed) const{
+	Fixed tmp;
+	
+	tmp._whole -= fixed._whole;
+	return tmp;
 }
 
 int		Fixed::getRawBits( void ) const{

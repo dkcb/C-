@@ -1,5 +1,5 @@
 VPATH		= ./obj:./src:
-SRC			= Fixed.cpp main.cpp
+SRC			= Fixed.cpp main.cpp #Fixed.hpp
 OBJ			= $(SRC:.cpp=.o)
 NAME		= fixed
 CFLAGS		=	-Wall -Werror -Wextra -std=c++98 # -g -fsanitize=address
