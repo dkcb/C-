@@ -3,6 +3,9 @@
 
 std::string	replace(std::string s, std::string ndl, std::string rep)
 {
+	int pos;
+	int replen;
+
 	while (s.find(ndl) != std::string::npos)
 		s = s.substr(0, s.find(ndl)) + rep + s.substr(s.find(ndl) + ndl.size());
 	return (s);
