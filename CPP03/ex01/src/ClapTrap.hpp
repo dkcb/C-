@@ -6,9 +6,9 @@ class ClapTrap {
 	public:
 					ClapTrap( );
 					~ClapTrap( );
-					ClapTrap( const ClapTrap &nb );
+					ClapTrap( const ClapTrap &cpy );
 					ClapTrap( std::string name );
-		ClapTrap	&operator= ( const ClapTrap &nb );
+		ClapTrap	&operator= ( const ClapTrap &cpy );
 		int			getHealth( void ) const;
 		int			getEnergy( void ) const;
 		int			getDamage( void ) const;

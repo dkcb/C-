@@ -13,9 +13,9 @@ ClapTrap::~ClapTrap( ){
 	std::cout << _name << "ClapTrap destroyed\n";
 }
 
-ClapTrap::ClapTrap( const ClapTrap &nb ){
-	std::cout << "Created ClapTrap copy based on " << nb.getName() << " ClapTrap\n";
-	*this = nb;
+ClapTrap::ClapTrap( const ClapTrap &cpy ){
+	std::cout << "Created ClapTrap copy based on " << cpy.getName() << " ClapTrap\n";
+	*this = cpy;
 }
 
 ClapTrap	&ClapTrap::operator= ( const ClapTrap &cpy ){

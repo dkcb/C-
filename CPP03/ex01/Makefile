@@ -1,7 +1,7 @@
 VPATH		= ./obj:./src:
-SRC			= ClapTrap.cpp main.cpp
+SRC			= ClapTrap.cpp ScavTrap.cpp main.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= ClapTrap
+NAME		= ScavTrap
 CFLAGS		=	-Wall -Werror -Wextra -std=c++98 # -g -fsanitize=address
 CC			=	c++
 
