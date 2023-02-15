@@ -30,7 +30,6 @@ class Fixed {
 		void	setRawBits( int const raw );
 		int		toInt( void ) const;
 		float	toFloat( void ) const;
-		friend	std::ostream& operator<<(std::ostream &os, const Fixed &fixed);
 		static	Fixed&	min(Fixed& val1, Fixed& val2);
 		static	Fixed&	max(Fixed& val1, Fixed& val2);
 		static	const Fixed&	min(const Fixed& val1, const Fixed& val2);
@@ -40,5 +39,7 @@ class Fixed {
 		int					_whole;
 		static const int	_fractional = 8;
 };
+
+std::ostream& operator<<(std::ostream &os, const Fixed &fixed);
 
 #endif
