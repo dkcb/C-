@@ -5,10 +5,13 @@
 class ClapTrap {
 	public:
 					ClapTrap( );
-					~ClapTrap( );
-					ClapTrap( const ClapTrap &cpy );
 					ClapTrap( std::string name );
+
+					~ClapTrap( );
+
+					ClapTrap( const ClapTrap &cpy );
 		ClapTrap	&operator= ( const ClapTrap &cpy );
+
 		int			getHealth( void ) const;
 		int			getEnergy( void ) const;
 		int			getDamage( void ) const;
