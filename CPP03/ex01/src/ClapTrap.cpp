@@ -10,7 +10,7 @@ ClapTrap::ClapTrap( std::string name ) : _health(10), _energy(10), _damage(0), _
 }
 
 ClapTrap::~ClapTrap( ){
-	std::cout << _name << "ClapTrap destroyed\n";
+	std::cout << _name << " ClapTrap destroyed\n";
 }
 
 ClapTrap::ClapTrap( const ClapTrap &cpy ){
@@ -47,17 +47,17 @@ std::string	ClapTrap::getName( void ) const{
 }
 
 void		ClapTrap::setHealth( int h){
-	std::cout << _name << "'s health changed for amount of " << h - _health << ", health is " <<  h << ".\n";
+	std::cout << _name << "'s health changed for amount of " << h - _health << ". " <<  h << " left.\n";
 	_health = h;
 }
 
 void		ClapTrap::setEnergy( int e){
-	std::cout << _name << "'s energy  changed for amount of " << e - _energy  << ", energy is " <<  e << ".\n";
+	std::cout << _name << "'s energy changed for amount of " << e - _energy << ". " << e << " left.\n";
 	_energy = e;
 }
 
 void		ClapTrap::setDamage( int d){
-	std::cout << _name << "'s damage changed for amount of " << d - _damage << ", damage is " <<  d << ".\n";
+	std::cout << _name << "'s damage changed for amount of " << d - _damage << ". " <<  d << " left.\n";
 	_damage = d;
 }
 
@@ -77,7 +77,6 @@ void		ClapTrap::attack(const std::string& target){
 }
 
 void		ClapTrap::takeDamage(unsigned int amount){
-	// _health -= amount;
 	std::cout << _name << " took " << amount << " of damage ";
 	setHealth(_health - amount);
 }
