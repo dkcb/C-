@@ -4,9 +4,6 @@
 FragTrap::FragTrap( ) : ClapTrap(){
 	std::cout << "Default FragTrap created" << std::endl;
 	setName("DefaultFrag");
-	setHealth (100);
-	setEnergy (100);
-	setDamage (30);
 }
 FragTrap::FragTrap( std::string name ) {
 	std::cout << name <<" FragTrap  with name created\n";
@@ -23,7 +20,7 @@ FragTrap::~FragTrap( ){
 void FragTrap::attack( const std::string& target ){
 	if (FragTrap::getHealth() > 0 && FragTrap::getEnergy() > 0)
 	{
-		std::cout << FragTrap::getName() << " hits hard frag " << target << " for " << FragTrap::getDamage() << " damage\n";
+		std::cout << FragTrap::getName() << " hits hard " << target << " for " << FragTrap::getDamage() << " damage\n";
 		setEnergy(getEnergy() - 1);
 	}
 	else

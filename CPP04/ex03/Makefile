@@ -1,8 +1,8 @@
 VPATH		= ./obj:./src:
-SRC			= ClapTrap.cpp FragTrap.cpp ScavTrap.cpp DiamondTrap.cpp main.cpp
+SRC			= ClapTrap.cpp FragTrap.cpp DiamondTrap.cpp main.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= DiamondTrap
-CFLAGS		=	-Wall -Werror -Wextra -std=c++98  -g # -fsanitize=address
+NAME		= FragTrap
+CFLAGS		=	-Wall -Werror -Wextra -std=c++98 # -g -fsanitize=address
 CC			=	c++
 
 all:		$(NAME)

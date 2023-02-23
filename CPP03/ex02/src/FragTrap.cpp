@@ -4,6 +4,9 @@
 FragTrap::FragTrap( ) : ClapTrap(){
 	std::cout << "Default FragTrap created" << std::endl;
 	setName("DefaultFrag");
+	setHealth (100);
+	setEnergy (100);
+	setDamage (30);
 }
 FragTrap::FragTrap( std::string name ) {
 	std::cout << name <<" FragTrap  with name created\n";

@@ -3,9 +3,6 @@
 
 ScavTrap::ScavTrap( ) : ClapTrap(){
 	std::cout << "Default ScavTrap created" << std::endl;
-	setHealth (100);
-	setEnergy (50);
-	setDamage (20);
 	setName("DefaultScav");
 }
 ScavTrap::ScavTrap( std::string name ) {
