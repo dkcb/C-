@@ -30,5 +30,5 @@ void ScavTrap::attack( const std::string& target ){
 		std::cout << ScavTrap::getName() << " cannot brutally hit " << target << "\n";
 }
 void	ScavTrap::guardGate( ){
-	std::cout << "ScavTrap" << ScavTrap::getName() << "is now in Gate keeper mode \n";
+	std::cout << "ScavTrap " << ScavTrap::getName() << " is now in Gate keeper mode! \n";
 }

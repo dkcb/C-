@@ -1,11 +1,10 @@
-
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap( ) : _health(10), _energy(10), _damage(0), _name("Default"){
+ClapTrap::ClapTrap( ) : _health(10), _energy(10), _damage(0), _name("Default_clap_name"){
 	std::cout << "Default ClapTrap created" << std::endl;
 }
 
-ClapTrap::ClapTrap( std::string name ) : _health(10), _energy(10), _damage(0), _name(name){
+ClapTrap::ClapTrap( std::string name ) : _health(10), _energy(10), _damage(0), _name(name + "_clap_name"){
 	std::cout << name <<" ClapTrap created\n";
 }
 
@@ -69,7 +68,7 @@ void		ClapTrap::setName( std::string n){
 void		ClapTrap::attack(const std::string& target){
 	if (_health > 0 && _energy > 0)
 	{
-		std::cout << _name << " hits " << target << " for " << _damage << " damage\n";
+		std::cout << _name << " hits with clap " << target << " for " << _damage << " damage\n";
 		setEnergy(_energy - 1);
 	}
 	else

@@ -2,15 +2,19 @@ VPATH		= ./obj:./src:
 SRC			= ClapTrap.cpp ScavTrap.cpp main.cpp
 OBJ			= $(SRC:.cpp=.o)
 NAME		= ScavTrap
-CFLAGS		=	-Wall -Werror -Wextra -std=c++98 # -g -fsanitize=address
-CC			=	c++
+CFLAGS		= -Wall -Werror -Wextra -std=c++98  -g3 # -fsanitize=address
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-			$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+			$(CXX) $(CFLAGS) $(OBJ) -o $(NAME)
+
 run:		$(NAME)
 			./$(NAME)
+
+%.o: %.cpp
+	$(CXX) $(CFLAGS) -c $<
+
 clean:
 			rm -f $(OBJ)
 
@@ -19,4 +23,4 @@ fclean:		clean
 
 re:			fclean $(NAME)
 
-.PHONY:		all clean fclean re bonus run
+.PHONY:		all clean fclean re run

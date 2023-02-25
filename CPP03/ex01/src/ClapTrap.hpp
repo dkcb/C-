@@ -26,7 +26,7 @@ class ClapTrap {
 		void beRepaired(unsigned int amount);
 
 
-	private:
+	protected:
 		int			_health;
 		int			_energy;
 		int			_damage;
