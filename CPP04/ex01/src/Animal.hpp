@@ -1,6 +1,7 @@
 #ifndef ANIMAL_HPP
 # define ANIMAL_HPP
 # include <iostream>
+# include "Brain.hpp"
 
 class Animal {
 	public:
@@ -16,8 +17,9 @@ class Animal {
 		virtual void	makeSound () const;
 
 	protected:
-				void	setType(std::string type);
+		virtual	void	setType(std::string type);
 			std::string	type;
+				Brain	*brain;
 };
 
 #endif
