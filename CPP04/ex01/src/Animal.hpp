@@ -16,10 +16,12 @@ class Animal {
 			std::string	getType() const;
 		virtual void	makeSound () const;
 
+				Brain*	getBrain() const;
+
 	protected:
 		virtual	void	setType(std::string type);
 			std::string	type;
-				Brain	*brain;
+				Brain	*_brain;
 };
 
 #endif

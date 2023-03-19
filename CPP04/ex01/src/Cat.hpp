@@ -13,6 +13,9 @@ class Cat : public Animal{
 		Cat	&operator= (const Cat &cpy);
 			void	makeSound () const;
 
+	private:
+			Brain *_brain;
+
 };
 
 #endif

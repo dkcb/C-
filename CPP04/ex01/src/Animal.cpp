@@ -10,6 +10,12 @@ Animal::Animal( std::string name ){
 	type = name;
 }
 
+void Animal::setType( std::string name ){
+	std::cout << "+Animal '" << name << "' b=name changed \n";
+	// Cat::setType("DefaultCat");
+	type = name;
+}
+
 Animal::~Animal( ){
 	std::cout << "-Animal destroyed\n";
 }
@@ -30,4 +36,9 @@ void	Animal::makeSound () const{
 
 std::string Animal::getType() const{
 	return type;
+}
+
+Brain*		Animal::getBrain() const
+{
+	return _brain;
 }

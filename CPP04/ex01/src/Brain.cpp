@@ -10,10 +10,7 @@ Brain::~Brain( ){
 
 Brain::Brain( const Brain &cpy ){
 	std::cout << "+Brain copy created " << std::endl;
-	for (int i = 0; i < 100; i++)
-	{
-		_ideas[i] = cpy._ideas[i];
-	}
+	*this = cpy;
 }
 
 Brain	&Brain::operator= ( const Brain &cpy ){
