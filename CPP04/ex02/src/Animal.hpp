@@ -13,10 +13,9 @@ class Animal {
 						Animal(const Animal &cpy);
 				Animal	&operator= (const Animal &cpy);
 		
-			std::string	getType() const;
-		virtual void	makeSound () const;
+	virtual	std::string	getType() const;
+		virtual void	makeSound () const = 0;
 
-				Brain*	getBrain() const;
 
 	protected:
 		virtual	void	setType(std::string type);
