@@ -1,7 +1,7 @@
 VPATH		= ./obj:./src:
-SRC			= Animal.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Dog.cpp main.cpp
+SRC			= Bureaucrat.cpp main.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= Animal
+NAME		= Bureaucrat
 CFLAGS		= -Wall -Werror -Wextra -std=c++98 \
 # -g3 -fsanitize=address
 
