@@ -1,41 +1,33 @@
 #ifndef FORM_H
-# define FORM_H
+#define FORM_H
 
-# include <iostream>
-# include "Bureaucrat.hpp"
-
-
-class Bureaucrat;
+#include <iostream>
+#include "Bureaucrat.hpp"
 
 class Form {
 public:
-    class GradeTooHighException : public std::exception {
-    public:
-        const char* what() const throw();
-    };
+			Form();
+			Form(const std::string& _name, int _signGrade, int _executeGrade);
+			Form(const Form& form);
+	Form	&operator=(const Form& form);
+	virtual ~Form();
 
-    class GradeTooLowException : public std::exception {
-    public:
-        const char* what() const throw();
-    };
+std::string	getName() const;
+	bool	isSigned() const;
+	int		getSignGrade() const;
+	int		getExecuteGrade() const;
 
-    Form(const std::string& name, int signGrade, int executeGrade);
-    ~Form();
-
-    std::string getName() const;
-    bool isSigned() const;
-    int getSignGrade() const;
-    int getExecuteGrade() const;
-
-    void beSigned(const Bureaucrat& bureaucrat);
+	void	beSigned(const Bureaucrat& bureaucrat);
+	class GradeTooLowException : public std::exception {
+			const char *what() const throw ();};
 
 private:
-    const std::string name;
-    bool signedStatus;
-    const int signGrade;
-    const int executeGrade;
+	const	std::string _name;
+	bool	_signedStatus;
+const int	_signGrade;
+const int	_executeGrade;
 };
 
 std::ostream& operator<<(std::ostream& os, const Form& form);
 
-#endif
+#endif  // FORM_H

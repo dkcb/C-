@@ -1,5 +1,4 @@
 #include <iostream>
-#include "Bureaucrat.hpp"
 #include "Form.hpp"
 
 int main() {
@@ -27,6 +26,5 @@ int main() {
     } catch (const std::exception& e) {
         std::cout << "Exception caught: " << e.what() << std::endl;
     }
-
     return 0;
 }
