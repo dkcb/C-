@@ -20,18 +20,3 @@ int main()
 	}
 	return 0;
 }
-// {
-//     try {
-//         Bureaucrat b1("John", 100);
-//         std::cout << b1 << std::endl;
-
-//         b1.decGrade();
-//         std::cout << b1 << std::endl;
-
-//     }
-//     catch (const std::exception& e) {
-//         std::cout << "Exception caught: " << e.what() << std::endl;
-//     }
-
-//     return 0;
-// }
