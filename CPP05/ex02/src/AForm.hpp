@@ -1,16 +1,16 @@
-#ifndef FORM_H
-#define FORM_H
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 #include <iostream>
 #include "Bureaucrat.hpp"
 
-class Form {
+class AForm {
 public:
-			Form();
-			Form(const std::string& _name, int _signGrade, int _executeGrade);
-			Form(const Form& form);
-	Form	&operator=(const Form& form);
-	virtual ~Form();
+			AForm();
+			AForm(const std::string& _name, int _signGrade, int _executeGrade);
+			AForm(const AForm& AForm);
+	AForm	&operator=(const AForm& AForm);
+	virtual ~AForm();
 
 std::string	getName() const;
 	bool	isSigned() const;
@@ -28,6 +28,6 @@ const int	_executeGrade;
 	bool	_signedStatus;
 };
 
-std::ostream& operator<<(std::ostream& os, const Form& form);
+std::ostream& operator<<(std::ostream& os, const AForm& AForm);
 
-#endif  // FORM_H
+#endif  // AForm_H
