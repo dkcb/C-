@@ -23,9 +23,9 @@ std::string	getName() const;
 
 private:
 	const	std::string _name;
-	bool	_signedStatus;
 const int	_signGrade;
 const int	_executeGrade;
+	bool	_signedStatus;
 };
 
 std::ostream& operator<<(std::ostream& os, const Form& form);

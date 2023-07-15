@@ -1,27 +1,25 @@
 #include "Form.hpp"
 
+Form::Form() : _name("Default"), _signGrade(1), _executeGrade(1), _signedStatus(false) {}
 
+Form::Form(const std::string& name, int signGrade, int executeGrade)
+    : _name(name), _signGrade(signGrade), _executeGrade(executeGrade), _signedStatus(false) {}
 
-Form::Form(std::string name, int sign_grade, int exec_grade) : _name(name), _signed(false), _sign_grade(check_grade(sign_grade)), _exec_grade(check_grade(exec_grade)) {
-	std::cout << "Form contructor called\n";
+Form::Form(const Form& form)
+    : _name(form._name), _signGrade(form._signGrade), _executeGrade(form._executeGrade), _signedStatus(form._signedStatus) {}
+
+Form& Form::operator=(const Form& form) {
+    if (this != &form) {
+        (std::string)_name = form._name;
+       _signedStatus = form._signedStatus;
+    }
+    return *this;
 }
 
-Form::~Form() {
-	std::cout << "Form destructor called\n";
-};
+Form::~Form() {}
 
-Form::Form(const Form& form) : _name(form._name), _signed(form._signed), _sign_grade(form._sign_grade), _exec_grade(form._exec_grade) {
-	std::cout << "Form copy contructor called\n";
-}
-
-Form &Form::operator=(const Form& form) {
-	//assignment is mandatory, const attribute too :(
-	//_name = form._name; 
-	_signed = form._signed;
-}
-
-const char *Form::GradeTooLowException::what() const throw () {
-	return "grade is too low!";
+std::string Form::getName() const {
+    return _name;
 }
 
 bool Form::isSigned() const {
@@ -42,6 +40,10 @@ void Form::beSigned(const Bureaucrat& bureaucrat) {
     } else {
         throw GradeTooLowException();
     }
+}
+
+const char* Form::GradeTooLowException::what() const throw() {
+    return "Grade is too low.";
 }
 
 std::ostream& operator<<(std::ostream& os, const Form& form) {
