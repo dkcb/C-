@@ -1,6 +1,8 @@
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 # include <iostream>
+# include "AForm.hpp"
+
 
 class Bureaucrat {
 	public:
@@ -29,6 +31,7 @@ class Bureaucrat {
 					};
 				void	incGrade();
 				void	decGrade();
+				void	executeForm(AForm const & form);
 	protected:
 	const std::string	_name;
 				int		_grade;

@@ -30,6 +30,16 @@ Bureaucrat	&Bureaucrat::operator= ( const Bureaucrat &cpy ){
 	return (*this);
 }
 
+void	Bureaucrat::executeForm(AForm const & form){
+	if (form.getExecuteGrade() >= _grade)
+	{
+		form.beSigned(*this);
+		std::cout << "Bureaucrat " << _name << "executed form " << form.getName() << std::endl;
+	}
+	else
+		throw Bureaucrat::GradeTooLowException();
+}
+
 std::string	Bureaucrat::getName() const{
 	return _name;
 }

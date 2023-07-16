@@ -20,6 +20,12 @@ std::string	getName() const;
 	void	beSigned(const Bureaucrat& bureaucrat);
 	class GradeTooLowException : public std::exception {
 			const char *what() const throw ();};
+	class FormNotSignedException : public std::exception {
+		public:
+			const char* what() const throw() {
+				return "Form is not signed.";
+			}
+};
 
 private:
 	const	std::string _name;
