@@ -6,6 +6,7 @@
 
 class AForm {
 public:
+	
 			AForm();
 			AForm(const std::string& _name, int _signGrade, int _executeGrade);
 			AForm(const AForm& AForm);
@@ -16,6 +17,7 @@ std::string	getName() const;
 	bool	isSigned() const;
 	int		getSignGrade() const;
 	int		getExecuteGrade() const;
+	virtual void	execute(const Bureaucrat& executor) const = 0;
 
 	void	beSigned(const Bureaucrat& bureaucrat);
 	class GradeTooLowException : public std::exception {

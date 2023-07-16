@@ -5,6 +5,18 @@
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
     : AForm("RobotomyRequestForm", 72, 45) {}
 
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other)
+    : AForm(other) {}
+
+RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& other) {
+    if (this != &other) {
+        AForm::operator=(other);
+    }
+    return *this;
+}
+
+RobotomyRequestForm::~RobotomyRequestForm() {}
+
 void RobotomyRequestForm::execute(const Bureaucrat& executor) const {
     if (!isSigned()) {
         throw FormNotSignedException();
@@ -21,6 +33,6 @@ void RobotomyRequestForm::execute(const Bureaucrat& executor) const {
     if (randomNum == 0) {
         std::cout << "Robotomy successful: " << getName() << " has been robotomized successfully.\n";
     } else {
-        std::cout << "Robotomy failed: " << getName() << " has not been robotomized.\n";
+        std::cout << "Robotomy failed: " << getName() << " could not be robotomized.\n";
     }
 }

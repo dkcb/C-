@@ -17,21 +17,17 @@ class Bureaucrat {
 			std::string	getName() const;
 					int	getGrade() const;
 			
-				class GradeTooHighException : public std::exception {
-					public:
-						const char* what() const throw() {
-							return "Grade is too high.";
-						}
-					};
 				class GradeTooLowException : public std::exception {
-					public:
-						const char* what() const throw() {
-							return "Grade is too low.";
-						}
-					};
+					const char *what() const throw ();
+				};
+				class GradeTooHighException : public std::exception {
+					const char *what() const throw ();
+				};
+
 				void	incGrade();
 				void	decGrade();
 				void	executeForm(AForm const & form);
+				void	signForm(AForm &form);
 	protected:
 	const std::string	_name;
 				int		_grade;

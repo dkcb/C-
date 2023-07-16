@@ -1,30 +1,43 @@
 #include <iostream>
-#include "Form.hpp"
+#include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main() {
     try {
-        Bureaucrat b1("John", 100);
-        Bureaucrat b2("Alice", 50);
+        // Create a bureaucrat
+        Bureaucrat bureaucrat("John Doe", 50);
 
-        Form form1("Form1", 80, 70);
-        std::cout << form1 << std::endl;
+        // Create forms
+        ShrubberyCreationForm shrubberyForm("Garden");
+        RobotomyRequestForm robotomyForm("Target");
+        PresidentialPardonForm pardonForm("Criminal");
 
-        form1.beSigned(b1);
-        std::cout << "After signing: " << form1 << std::endl;
+        // Execute signing and executing forms
+        bureaucrat.signForm(shrubberyForm);
+        bureaucrat.executeForm(shrubberyForm);
 
-        Form form2("Form2", 60, 90);
-        std::cout << form2 << std::endl;
+        bureaucrat.signForm(robotomyForm);
+        bureaucrat.executeForm(robotomyForm);
 
-        form2.beSigned(b2);
-        std::cout << "After signing: " << form2 << std::endl;
+        bureaucrat.signForm(pardonForm);
+        bureaucrat.executeForm(pardonForm);
 
-        Form form3("Form3", 30, 40);
-        std::cout << form3 << std::endl;
+        // Test error cases
+        // 1. Trying to sign already signed form
+        bureaucrat.signForm(shrubberyForm);
 
-        form3.beSigned(b1); // GradeTooLowException should be thrown
+        // 2. Trying to execute unsigned form
+        Bureaucrat bureaucrat2("Jane Smith", 30);
+        bureaucrat2.executeForm(robotomyForm);
 
+        // 3. Trying to execute form with low-grade bureaucrat
+        Bureaucrat bureaucrat3("Mike Brown", 100);
+        bureaucrat3.executeForm(pardonForm);
     } catch (const std::exception& e) {
         std::cout << "Exception caught: " << e.what() << std::endl;
     }
+
     return 0;
 }
