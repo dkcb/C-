@@ -1,12 +1,12 @@
 #include "AForm.hpp"
 
-AForm::AForm() : _name("Default"), _signGrade(1), _executeGrade(1), _signedStatus(false) {}
+AForm::AForm() :  target("Default"), _name("Default"), _signGrade(1), _executeGrade(1), _signedStatus(false) {}
 
-AForm::AForm(const std::string& name, int signGrade, int executeGrade)
-    : _name(name), _signGrade(signGrade), _executeGrade(executeGrade), _signedStatus(false) {}
+AForm::AForm(const std::string& name, int signGrade, int executeGrade, std::string target1)
+    : target(target1), _name(name), _signGrade(signGrade), _executeGrade(executeGrade), _signedStatus(false) {}
 
 AForm::AForm(const AForm& AForm)
-    : _name(AForm._name), _signGrade(AForm._signGrade), _executeGrade(AForm._executeGrade), _signedStatus(AForm._signedStatus) {}
+    :  target(AForm.target), _name(AForm._name), _signGrade(AForm._signGrade), _executeGrade(AForm._executeGrade), _signedStatus(AForm._signedStatus) {}
 
 AForm& AForm::operator=(const AForm& AForm) {
     if (this != &AForm) {
@@ -44,6 +44,10 @@ void AForm::beSigned(const Bureaucrat& bureaucrat) {
 
 const char* AForm::GradeTooLowException::what() const throw() {
     return "Grade is too low.";
+}
+
+const char* AForm::NotSignedException::what() const throw () {
+	return "the form is not signed";
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& AForm) {

@@ -1,5 +1,5 @@
 VPATH		= ./obj:./src:
-SRC			= Bureaucrat.cpp Form.cpp main.cpp
+SRC			= Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp main.cpp
 OBJ			= $(SRC:.cpp=.o)
 NAME		= Form
 CFLAGS		= -Wall -Werror -Wextra -std=c++98 \

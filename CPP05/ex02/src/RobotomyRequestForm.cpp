@@ -3,7 +3,7 @@
 #include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
-    : AForm("RobotomyRequestForm", 72, 45) {}
+    : AForm("RobotomyRequestForm", 72, 45, target) {}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other)
     : AForm(other) {}
@@ -19,7 +19,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {}
 
 void RobotomyRequestForm::execute(const Bureaucrat& executor) const {
     if (!isSigned()) {
-        throw FormNotSignedException();
+        throw NotSignedException();
     }
 
     if (executor.getGrade() > getExecuteGrade()) {

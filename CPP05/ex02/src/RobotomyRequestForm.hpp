@@ -12,4 +12,4 @@ public:
     void execute(const Bureaucrat& executor) const;
 };
 
-#endif  // ROBOTOMYREQUESTFORM_H
+#endif
