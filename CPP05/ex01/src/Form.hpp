@@ -20,6 +20,8 @@ std::string	getName() const;
 	void	beSigned(const Bureaucrat& bureaucrat);
 	class GradeTooLowException : public std::exception {
 			const char *what() const throw ();};
+	class GradeTooHighException : public std::exception {
+			const char *what() const throw ();};
 
 private:
 	const	std::string _name;

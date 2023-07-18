@@ -23,6 +23,8 @@ std::string	getName() const;
 	std::string	target;
 	class GradeTooLowException : public std::exception {
 			const char *what() const throw ();};
+	class GradeTooHighException : public std::exception {
+			const char *what() const throw ();};
 	class NotSignedException : public std::exception {
 			const char *what() const throw ();};
 private:

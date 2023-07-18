@@ -10,8 +10,10 @@ Bureaucrat::Bureaucrat( const std::string name, int grade){
 	std::cout << "+Bureaucrat '" << name << "' created \n";
 	_grade = grade;
 	(std::string)_name = name;
-	Bureaucrat::GradeTooLowException();
-	Bureaucrat::GradeTooHighException();
+	if (_grade > 150)
+		throw Bureaucrat::GradeTooLowException();
+	if (_grade < 1)
+		throw Bureaucrat::GradeTooHighException();
 }
 
 Bureaucrat::~Bureaucrat( ){
@@ -38,16 +40,16 @@ int	Bureaucrat::getGrade() const{
 	return _grade;
 }
 
-void	Bureaucrat::incGrade(){
+void	Bureaucrat::decGrade(){
 		_grade++;
 		if (_grade > 150)
-		throw Bureaucrat::GradeTooLowException();
+			throw Bureaucrat::GradeTooLowException();
 
 }
-void	Bureaucrat::decGrade(){
+void	Bureaucrat::incGrade(){
 		_grade--;
 		if (_grade < 1)
-		throw Bureaucrat::GradeTooHighException();
+			throw Bureaucrat::GradeTooHighException();
 
 }
 
