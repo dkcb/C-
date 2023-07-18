@@ -72,7 +72,6 @@ void	Bureaucrat::incGrade(){
 			throw Bureaucrat::GradeTooHighException();
 }
 
-
 const char *Bureaucrat::GradeTooLowException::what() const throw () {
 	return "grade is too low!";
 }
