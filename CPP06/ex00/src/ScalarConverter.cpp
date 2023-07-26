@@ -32,6 +32,14 @@ void ScalarConverter::convert(const std::string& input) {
     double dbl;
     std::stringstream ss(input);
 
+    if (input == "nanf" || input == "-inff" || input == "+inff") {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: " << input << std::endl;
+        std::cout << "double: " << input.substr(0, input.size()-1) << std::endl;
+        return ;
+    }
+
     if (isChar(input)) {
         ss >> ch;
         std::cout << "Char: " << ch << std::endl;
