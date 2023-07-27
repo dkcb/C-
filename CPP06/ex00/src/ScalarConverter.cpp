@@ -1,7 +1,7 @@
 #include "ScalarConverter.hpp"
 
 static bool isChar(const std::string& input) {
-    return input.size() == 3 && input.front() == '\'' && input.back() == '\'';
+    return input.size() == 1 && !(input[0] < 58 && input[0] > 47);
 }
 
 static bool isInt(const std::string& input) {
@@ -12,10 +12,10 @@ static bool isInt(const std::string& input) {
 }
 
 static bool isFloat(const std::string& input) {
-    std::stringstream ss(input);
+    std::stringstream ss(input.substr(0, input.size() - 1));
     float value;
     ss >> value;
-    return !ss.fail() && ss.eof();
+    return !ss.fail() && ss.eof() && input.back() == 'f';
 }
 
 static bool isDouble(const std::string& input) {
@@ -42,28 +42,29 @@ void ScalarConverter::convert(const std::string& input) {
 
     if (isChar(input)) {
         ss >> ch;
-        std::cout << "Char: " << ch << std::endl;
+        std::cout << "Char detected: \n" << ch << std::endl;
         integer = static_cast<int>(ch);
         flt = static_cast<float>(ch);
         dbl = static_cast<double>(ch);
     }
     else if (isInt(input)) {
         ss >> integer;
-        std::cout << "Int: " << integer << std::endl;
+        std::cout << "Int detected: \n" << integer << std::endl;
         ch = static_cast<char>(integer);
         flt = static_cast<float>(integer);
         dbl = static_cast<double>(integer);
     }
     else if (isFloat(input)) {
-        ss >> flt;
-        std::cout << "Float: " << flt << std::endl;
+        std::stringstream sf(input.substr(0, input.size() - 1));
+        sf >> flt;
+        std::cout << "Float detected: \n" << flt << std::endl;
         ch = static_cast<char>(flt);
         integer = static_cast<int>(flt);
         dbl = static_cast<double>(flt);
     }
     else if (isDouble(input)) {
         ss >> dbl;
-        std::cout << "Double: " << dbl << std::endl;
+        std::cout << "Double detected: \n" << dbl << std::endl;
         ch = static_cast<char>(dbl);
         integer = static_cast<int>(dbl);
         flt = static_cast<float>(dbl);
@@ -72,10 +73,12 @@ void ScalarConverter::convert(const std::string& input) {
         std::cout << "Invalid input or conversion not supported." << std::endl;
         return;
     }
-
-    std::cout << "Char: " << ch << std::endl;
+    if (ch > 32 && ch < 127)
+        std::cout << "Char: " << ch << std::endl;
+    else
+        std::cout << "Char is nonprintable" << std::endl;
     std::cout << "Int: " << integer << std::endl;
-    std::cout << "Float: " << flt << std::endl;
+    std::cout << "Float: " << flt << "f" << std::endl;
     std::cout << "Double: " << dbl << std::endl;
 }
 
