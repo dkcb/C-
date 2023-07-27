@@ -78,7 +78,13 @@ void ScalarConverter::convert(const std::string& input) {
     else
         std::cout << "Char is nonprintable" << std::endl;
     std::cout << "Int: " << integer << std::endl;
-    std::cout << "Float: " << flt << "f" << std::endl;
-    std::cout << "Double: " << dbl << std::endl;
+    if ((flt - (int)flt))
+        std::cout << "Float: " << flt << "f" << std::endl;
+    else
+        std::cout << "Float: " << flt << ".0f" << std::endl;
+    if (dbl - (int) dbl)
+        std::cout << "Double: " << dbl << std::endl;
+    else
+        std::cout << "Double: " << dbl << ".0"<< std::endl;
 }
 
