@@ -1,7 +1,7 @@
 VPATH		= ./obj:./src:
-SRC			= Base.cpp main.cpp
+SRC			= main.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= Identify
+NAME		= Swapcompare
 CFLAGS		= #-Wall -Werror -Wextra -std=c++98 \
 # -g3 -fsanitize=address
 
