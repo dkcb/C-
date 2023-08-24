@@ -7,9 +7,9 @@ int main() {
         Bureaucrat b2("Alice", 50);
 
         Form form1("Form1", 80, 70);
-        std::cout << form1 << std::endl;
+        // std::cout << form1 << std::endl;
 
-        form1.beSigned(b1);
+        // form1.beSigned(b1);
         std::cout << "After signing: " << form1 << std::endl;
 
         Form form2("Form2", 60, 90);

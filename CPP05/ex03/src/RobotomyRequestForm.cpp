@@ -1,6 +1,6 @@
 #include "RobotomyRequestForm.hpp"
 #include <cstdlib>
-#include <ctime>
+#include <random>
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
     : AForm("RobotomyRequestForm", 72, 45, target) {}
@@ -9,9 +9,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other)
     : AForm(other) {}
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& other) {
-    if (this != &other) {
         AForm::operator=(other);
-    }
     return *this;
 }
 
@@ -26,13 +24,13 @@ void RobotomyRequestForm::execute(const Bureaucrat& executor) const {
         throw GradeTooLowException();
     }
 
-    srand(time(0));
-    int randomNum = rand() % 2;
-
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(0, 1);
     std::cout << "Drilling noises...\n";
-    if (randomNum == 0) {
-        std::cout << "Robotomy successful: " << getName() << " has been robotomized successfully.\n";
+    if (dist(gen) == 0) {
+        std::cout << "Robotomy successful: " << target << " has been robotomized successfully.\n";
     } else {
-        std::cout << "Robotomy failed: " << getName() << " could not be robotomized.\n";
+        std::cout << "Robotomy failed: " << target << " could not be robotomized.\n";
     }
 }

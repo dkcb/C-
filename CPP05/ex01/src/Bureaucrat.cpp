@@ -6,10 +6,10 @@ Bureaucrat::Bureaucrat() : _name("Default"), _grade(75){
 	std::cout << "+Default Bureaucrat created\n";
 }
 
-Bureaucrat::Bureaucrat( const std::string name, int grade){
+Bureaucrat::Bureaucrat( const std::string name, int grade): _name (name) , _grade (grade) {
 	std::cout << "+Bureaucrat '" << name << "' created \n";
 	_grade = grade;
-	(std::string)_name = name;
+	
 	if (_grade > 150)
 		throw Bureaucrat::GradeTooLowException();
 	if (_grade < 1)
@@ -20,14 +20,13 @@ Bureaucrat::~Bureaucrat( ){
 	std::cout << "-Bureaucrat destroyed\n";
 }
 
-Bureaucrat::Bureaucrat( const Bureaucrat &cpy ){
+Bureaucrat::Bureaucrat( const Bureaucrat &cpy ): _name (cpy.getName()) {
 	std::cout << "Bureaucrat copy created - " << cpy.getName() << std::endl;
-	(std::string)_name = cpy.getName();
+	
 	_grade = cpy.getGrade();
 }
 
 Bureaucrat	&Bureaucrat::operator= ( const Bureaucrat &cpy ){
-	(std::string)_name = cpy.getName();
 	_grade = cpy.getGrade();
 	return (*this);
 }
@@ -53,6 +52,8 @@ void	Bureaucrat::incGrade(){
 }
 
 void Bureaucrat::signForm(Form &form) {
+	if (&form == nullptr)
+		throw std::runtime_error ("Form is NULL!\n");
 	try {
 		form.beSigned(*this);
 		std::cout << *this << " signed " << form << std::endl;

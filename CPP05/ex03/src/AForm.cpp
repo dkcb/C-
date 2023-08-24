@@ -4,20 +4,17 @@ AForm::AForm() :  target("Default"), _name("Default"), _signGrade(1), _executeGr
 
 AForm::AForm(const std::string& name, int signGrade, int executeGrade, std::string target1)
     : target(target1), _name(name), _signGrade(signGrade), _executeGrade(executeGrade), _signedStatus(false) {
-    if (_signGrade || _executeGrade > 150)
-		throw Bureaucrat::GradeTooLowException();
-	if (_signGrade || _executeGrade < 1)
-		throw Bureaucrat::GradeTooHighException();
+    if (_signGrade > 150 || _executeGrade > 150)
+		throw GradeTooLowException();
+	if (_signGrade < 1 || _executeGrade < 1)
+		throw GradeTooHighException();
 }
 
 AForm::AForm(const AForm& AForm)
     :  target(AForm.target), _name(AForm._name), _signGrade(AForm._signGrade), _executeGrade(AForm._executeGrade), _signedStatus(AForm._signedStatus) {}
 
 AForm& AForm::operator=(const AForm& AForm) {
-    if (this != &AForm) {
-        (std::string)_name = AForm._name;
-       _signedStatus = AForm._signedStatus;
-    }
+    _signedStatus = AForm._signedStatus;
     return *this;
 }
 

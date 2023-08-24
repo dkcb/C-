@@ -10,9 +10,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
     : AForm(other) {}
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other) {
-    if (this != &other) {
         AForm::operator=(other);
-    }
     return *this;
 }
 
@@ -27,7 +25,7 @@ void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
         throw GradeTooLowException();
     }
 
-    std::ofstream file((getName() + "_" + executor.getName() + "_shrubbery").c_str());
+    std::ofstream file((target + "_" + executor.getName() + "_shrubbery").c_str());
     if (file.is_open()) {
         file << "    ccee       88oo\n";
         file << " C8O8O8Q8P  Ob o8oo\n";

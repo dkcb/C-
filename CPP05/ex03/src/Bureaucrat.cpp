@@ -32,8 +32,9 @@ Bureaucrat	&Bureaucrat::operator= ( const Bureaucrat &cpy ){
 	return (*this);
 }
 
-
 void Bureaucrat::signForm(AForm &form) {
+	if (&form == nullptr)
+		throw std::runtime_error ("Form is NULL!\n");
 	try {
 		form.beSigned(*this);
 		std::cout << *this << " signed " << form << std::endl;
@@ -43,6 +44,8 @@ void Bureaucrat::signForm(AForm &form) {
 }
 
 void	Bureaucrat::executeForm(AForm const & form){
+	if (&form == nullptr)
+		throw std::runtime_error ("Form is NULL!\n");
 	if (form.getExecuteGrade() >= _grade)
 	{
 		form.execute(*this);
