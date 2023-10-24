@@ -11,8 +11,8 @@ int main(int argc, char* argv[]) {
     std::string inputFilename = argv[1];
 
     // Convert data from the input file to a database
-    std::map<std::string, float> DB_prices = db.Convert_To_DB("data.csv", ',');
-    std::map<std::string, float> DB_rates = db.Convert_To_DB("input.txt", '|');
+    std::map<std::string, float> DB_prices = db.("data.csv", ',', 2);
+    std::map<std::string, float> DB_rates = db.File_To_DB("input.txt", '|', 2);
     if (DB_prices.empty()) {
         std::cerr << "Failed to read data from the prices file." << std::endl;
         return 1;
@@ -22,14 +22,14 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     // db.Print_DB(DB_prices, std::cout);
-    db.Print_DB(DB_rates, std::cout, 2);
+    db.Print_DB(DB_rates, '|', 2);
 
     // Merge the database with itself (as an example)
-    std::map<std::string, float> mergedData = db.Merge_DB(DB_prices, DB_rates);
+    std::map<std::string, float> mergedData = db.Multiply_DB_Values(DB_prices, DB_rates, 0, 1000);
 
     // Print the merged data
     std::cout << "---------------------\n\n\n\n\n";
-    db.Print_DB(mergedData, std::cout, 2);
+    db.Print_DB(mergedData, '|', 2);
 
     return 0;
 }

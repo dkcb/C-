@@ -22,14 +22,14 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     // db.Print_DB(DB_prices, std::cout);
-    db.Print_DB(DB_rates, std::cout, 2);
+    db.Print_DB(DB_rates, std::cout);
 
     // Merge the database with itself (as an example)
     std::map<std::string, float> mergedData = db.Merge_DB(DB_prices, DB_rates);
 
     // Print the merged data
     std::cout << "---------------------\n\n\n\n\n";
-    db.Print_DB(mergedData, std::cout, 2);
+    // db.Print_Merged(mergedData, std::cout);
 
     return 0;
 }

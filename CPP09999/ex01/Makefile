@@ -1,7 +1,7 @@
 VPATH		= ./obj:./src:
-SRC			= main.cpp Database.cpp
+SRC			= main.cpp Span.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= btc
+NAME		= Span
 CFLAGS		= #-Wall -Werror -Wextra -std=c++98 \
 # -g3 -fsanitize=address
 
@@ -11,7 +11,7 @@ $(NAME):	$(OBJ)
 			$(CXX) $(CFLAGS) $(OBJ) -o $(NAME)
 
 run:		$(NAME)
-			./$(NAME) "input.txt"
+			./$(NAME)
 
 %.o: %.cpp
 	$(CXX) $(CFLAGS) -c $<

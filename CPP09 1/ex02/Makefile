@@ -1,7 +1,7 @@
 VPATH		= ./obj:./src:
 SRC			= main.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= Iter
+NAME		= MutantStack
 CFLAGS		= #-Wall -Werror -Wextra -std=c++98 \
 # -g3 -fsanitize=address
 

@@ -20,7 +20,7 @@ class Fixed {
 		Fixed	&operator++( ); 	// pre
 		Fixed	operator--( int );	// post
 		Fixed	&operator--( );		// pre
-		bool	operator>( const Fixed &fixed ) const;
+		const bool	operator>( const Fixed &fixed );
 		bool	operator<( const Fixed &fixed ) const;
 		bool	operator>=( const Fixed &fixed ) const;
 		bool	operator<=( const Fixed &fixed ) const;

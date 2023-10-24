@@ -33,7 +33,7 @@ Fixed::Fixed( const float f){
 	_whole = roundf(f * (1 << _fractional));
 }
 
-bool	Fixed::operator> ( const Fixed &fixed ) const{
+const bool	Fixed::operator> ( const Fixed &fixed ){
 	return (_whole > fixed._whole);
 }
 
