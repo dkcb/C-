@@ -52,6 +52,15 @@ void Database::Print_DB(const std::map<std::string, float>& db, std::ostream& ou
     }
 }
 
+void Database::Print_Result(const std::map<std::string, float>& db1, const std::map<std::string, float>& db2) {
+    for (const auto& entry1 : db1) {
+        std::cout << entry1.first;
+            std::cout << " | " << std::fixed << std::setprecision(2) << entry1.second;
+            std::cout << " => " << std::fixed << std::setprecision(2) << entry1.second;
+        }
+        std::cout << "\n";
+}
+
 
 
 bool Database::IsValidDate(const std::string& date) {

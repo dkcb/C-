@@ -10,6 +10,7 @@ public:
     std::map<std::string, float> Convert_To_DB(const std::string& filename, const char separator);
     std::map<std::string, float> Merge_DB(const std::map<std::string, float>& db1, const std::map<std::string, float>& db2);
     void Print_DB(const std::map<std::string, float>& db, std::ostream& output, int elementsToPrint);
+    void Print_Result(const std::map<std::string, float>& db1, const std::map<std::string, float>& db2);
     bool IsValidDate(const std::string& date);
     bool IsValidValue(const std::string& value);
 };
