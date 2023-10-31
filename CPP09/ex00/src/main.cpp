@@ -20,15 +20,15 @@ int main(int argc, char* argv[]) {
         std::cerr << "Failed to read data from the prices file." << std::endl;
         return 1;
     }
-    // Database::Print_DB(DB_prices, std::cout);
+    Database::Print_DB(DB_prices, std::cout, 2);
+    std::cout << "---------------------\n\n\n";
     Database::Print_DB(DB_rates, std::cout, 2);
 
     // Merge the database with itself (as an example)
-    std::map<std::string, float> mergedData = Database::Merge_DB(DB_prices, DB_rates);
 
+    std::cout << "---------------------\n\n\n";
     // Print the merged data
-    std::cout << "---------------------\n\n\n\n\n";
-    Database::Print_DB(mergedData, std::cout, 2);
+    Database::Print_Result(DB_prices, DB_rates);
 
     return 0;
 }

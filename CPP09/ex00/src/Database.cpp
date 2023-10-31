@@ -53,12 +53,50 @@ void Database::Print_DB(const std::map<std::string, float>& db, std::ostream& ou
 }
 
 void Database::Print_Result(const std::map<std::string, float>& db1, const std::map<std::string, float>& db2) {
+    std::map<std::string, float> result;
+    float lastValue2 = 1.0; // Initialize to a default value
+
     for (const auto& entry1 : db1) {
-        std::cout << entry1.first;
-            std::cout << " | " << std::fixed << std::setprecision(2) << entry1.second;
-            std::cout << " => " << std::fixed << std::setprecision(2) << entry1.second;
+        auto it = db2.find(entry1.first);
+        if (it != db2.end()) {
+            lastValue2 = it->second;
+            float resultValue = entry1.second * it->second;
+            result[entry1.first] = resultValue;
+        } else {
+            float resultValue = entry1.second * lastValue2;
+            result[entry1.first] = resultValue;
         }
-        std::cout << "\n";
+    }
+
+        // for (const auto& entry : db1) {
+        //     float value2 = 1.0; // Initialize to a default value
+        //     auto it = db2.find(entry.first);
+        //     if (it != db2.end()) {
+        //         value2 = it->second;
+        //     }
+
+        //     float result = entry.second * value2;
+
+        //     std::cout << entry.first << " | " << std::fixed << std::setprecision(2) << result << "\n";
+        // }
+    // for (const auto& entry1 : db1) {
+    //     std::cout << entry1.first;
+    //     std::cout << " | " << std::fixed << std::setprecision(2) << entry1.second;
+    //     for (const auto& entry2 : db2) {
+    //         // auto it = db2.find(entry1.first);
+    //         std::cout << entry2.second <<"E";
+    //         // if (it != db2.end()) {
+    //         // If the key exists in both databases, multiply the values
+    //             std::cout << " => " << std::fixed << std::setprecision(2) << entry1.second * entry2.second;
+    //         // }
+    //         // else
+    //         // {
+    //         //     std::cout << " => " << std::fixed << std::setprecision(2) << entry1.second * 0;
+    //         // }
+    //     }
+    //     std::cout << "\n";
+    // }
+    // std::cout << "\n";
 }
 
 
