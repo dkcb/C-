@@ -63,8 +63,9 @@ void Database::Print_Result(const std::map<std::string, float>& db1, const std::
             float resultValue = entry1.second * it->second;
             result[entry1.first] = resultValue;
         } else {
-            float resultValue = entry1.second * lastValue2;
-            result[entry1.first] = resultValue;
+            // float resultValue = entry1.second * lastValue2;
+            std::cout << entry1.first << " | " << entry1.second << " => " << "lv:" << lastValue2 << std::fixed << std::setprecision(2) << " res: "<< entry1.second * lastValue2 << std::endl;
+            // result[entry1.first] = resultValue;
         }
     }
 
