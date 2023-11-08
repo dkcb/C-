@@ -16,27 +16,14 @@ std::map<std::string, float> Database::Convert_To_DB(const std::string& filename
             std::getline(iss, valueStr, separator);
 
             if (IsValidValue(valueStr)) {
-                float value = std::stof(valueStr);
-                db[key] = value;
+                db[key] = std::stof(valueStr);
+            }else{
+                std::cout << key << " WRONG VALUE! " << valueStr << "\n";
             }
         }
         file.close();
     }
     return db;
-}
-
-std::map<std::string, float> Database::Merge_DB(const std::map<std::string, float>& db1, const std::map<std::string, float>& db2) {
-    std::map<std::string, float> mergedDB;
-
-    for (const auto& entry : db1) {
-        auto it = db2.find(entry.first);
-        if (it != db2.end()) {
-            // If the key exists in both databases, multiply the values
-            mergedDB[entry.first] = entry.second * it->second;
-        }
-    }
-    Database::Print_DB(mergedDB, std::cout, 2);
-    return mergedDB;
 }
 
 void Database::Print_DB(const std::map<std::string, float>& db, std::ostream& output, int elementsToPrint) {
@@ -57,63 +44,66 @@ void Database::Print_Result(const std::map<std::string, float>& db1, const std::
     float lastValue2 = 1.0; // Initialize to a default value
 
     for (const auto& entry1 : db1) {
-        auto it = db2.find(entry1.first + " ");// + " ");
+        if (!isValidDate(entry1.first))
+        {
+            std::cout << entry1.first << "wrong date format!\n";
+        }
+        auto it = db2.find(entry1.first + " ");
         if (it != db2.end()) {
-            lastValue2 = it->second;
-            std::cout << entry1.first << " | " << entry1.second << " FOUND! => " << "lv:" << lastValue2 << std::fixed << std::setprecision(2) << " res: "<< entry1.second * lastValue2 << std::endl;
+            if (it->second < 0.0 || it->second > 1000.0){
+                std::cout << entry1.first << "  Rate is " << it->second << ", but it must be positive float between 0 and 1000!\n";
+            }else
+            {
+                lastValue2 = it->second;
+                std::cout << entry1.first << " | " << entry1.second << " => " << "lv:" << lastValue2 << std::fixed << std::setprecision(2) << " res: "<< entry1.second * lastValue2 << std::endl;
+            }
         } else {
             // float resultValue = entry1.second * lastValue2;
-            // std::cout << entry1.first << " | " << entry1.second << " => " << "lv:" << lastValue2 << std::fixed << std::setprecision(2) << " res: "<< entry1.second * lastValue2 << std::endl;
-            std::cout << entry1.first << " LV = " << lastValue2 << std::endl;
+            std::cout << entry1.first << " | " << entry1.second << " => " << "lv:" << lastValue2 << std::fixed << std::setprecision(2) << " res: "<< entry1.second * lastValue2 << std::endl;
+            // std::cout << entry1.first << " LV = " << lastValue2 << std::endl;
             // result[entry1.first] = resultValue;
         }
     }
 
-        // for (const auto& entry : db1) {
-        //     float value2 = 1.0; // Initialize to a default value
-        //     auto it = db2.find(entry.first);
-        //     if (it != db2.end()) {
-        //         value2 = it->second;
-        //     }
-
-        //     float result = entry.second * value2;
-
-        //     std::cout << entry.first << " | " << std::fixed << std::setprecision(2) << result << "\n";
-        // }
-    // for (const auto& entry1 : db1) {
-    //     std::cout << entry1.first;
-    //     std::cout << " | " << std::fixed << std::setprecision(2) << entry1.second;
-    //     for (const auto& entry2 : db2) {
-    //         // auto it = db2.find(entry1.first);
-    //         std::cout << entry2.second <<"E";
-    //         // if (it != db2.end()) {
-    //         // If the key exists in both databases, multiply the values
-    //             std::cout << " => " << std::fixed << std::setprecision(2) << entry1.second * entry2.second;
-    //         // }
-    //         // else
-    //         // {
-    //         //     std::cout << " => " << std::fixed << std::setprecision(2) << entry1.second * 0;
-    //         // }
-    //     }
-    //     std::cout << "\n";
-    // }
-    // std::cout << "\n";
 }
 
+bool Database::isValidDate(const std::string& dateStr) {
+    // Define a regular expression pattern for the YYYY-MM-DD format.
+    std::regex pattern("^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$");
 
+    // Use std::regex_match to check if the dateStr matches the pattern.
+    if (std::regex_match(dateStr, pattern)) {
+        // Extract year, month, and day from the input string.
+        int year = std::stoi(dateStr.substr(0, 4));
+        int month = std::stoi(dateStr.substr(5, 2));
+        int day = std::stoi(dateStr.substr(8, 2));
 
-bool Database::IsValidDate(const std::string& date) {
-    // You can implement date validation logic here
-    // It should check if the date is in the format: Year-Month-Day
-    // and if it's a valid date.
-    // Implementing this validation is beyond the scope of this example.
-    return true; // Placeholder, assuming dates are valid
+        // Validate the number of days in each month.
+        if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) {
+            return false;
+        } else if (month == 2) {
+            // Leap year check: February can have 29 days.
+            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                if (day > 29) {
+                    return false;
+                }
+            } else {
+                if (day > 28) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    return "Wrong date format";
 }
 
 bool Database::IsValidValue(const std::string& value) {
     try {
         float floatValue = std::stof(value);
-        return (floatValue >= 0.0 && floatValue <= 1000.0);
+        return (1);
     }
     catch (const std::exception& e) {
         return false;

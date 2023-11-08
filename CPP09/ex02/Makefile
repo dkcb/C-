@@ -11,7 +11,7 @@ $(NAME):	$(OBJ)
 			$(CXX) $(CFLAGS) $(OBJ) -o $(NAME)
 
 run:		$(NAME)
-			./$(NAME)
+			./$(NAME) "input.txt | cat > 2.txt"
 
 %.o: %.cpp
 	$(CXX) $(CFLAGS) -c $<
