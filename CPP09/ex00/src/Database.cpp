@@ -57,14 +57,14 @@ void Database::Print_Result(const std::map<std::string, float>& db1, const std::
     float lastValue2 = 1.0; // Initialize to a default value
 
     for (const auto& entry1 : db1) {
-        auto it = db2.find(entry1.first);
+        auto it = db2.find(entry1.first + " ");// + " ");
         if (it != db2.end()) {
             lastValue2 = it->second;
-            float resultValue = entry1.second * it->second;
-            result[entry1.first] = resultValue;
+            std::cout << entry1.first << " | " << entry1.second << " FOUND! => " << "lv:" << lastValue2 << std::fixed << std::setprecision(2) << " res: "<< entry1.second * lastValue2 << std::endl;
         } else {
             // float resultValue = entry1.second * lastValue2;
-            std::cout << entry1.first << " | " << entry1.second << " => " << "lv:" << lastValue2 << std::fixed << std::setprecision(2) << " res: "<< entry1.second * lastValue2 << std::endl;
+            // std::cout << entry1.first << " | " << entry1.second << " => " << "lv:" << lastValue2 << std::fixed << std::setprecision(2) << " res: "<< entry1.second * lastValue2 << std::endl;
+            std::cout << entry1.first << " LV = " << lastValue2 << std::endl;
             // result[entry1.first] = resultValue;
         }
     }
