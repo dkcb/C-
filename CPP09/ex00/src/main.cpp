@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
 
     // Convert data from the input file to a database
     std::map<std::string, float> DB_prices = Database::Convert_To_DB("data.csv", ',');
-    std::cout << " prices size is: " << DB_prices.size() << "\n";
+    // std::cout << " prices size is: " << DB_prices.size() << "\n";
     std::map<std::string, float> DB_rates = Database::Convert_To_DB(argv[1], '|');
     if (DB_prices.empty()) {
         std::cerr << "Failed to read data from the prices file." << std::endl;
@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     // Database::Print_DB(DB_prices, std::cout, 2);
-    std::cout << "---------------------\n\n\n";
+    // std::cout << "---------------------\n\n\n";
     Database::Print_DB(DB_rates, std::cout, 2);
 
     // Merge the database with itself (as an example)
