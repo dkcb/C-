@@ -10,6 +10,10 @@ std::map<std::string, float> Database::Convert_To_DB(const std::string& filename
     if (file.is_open()) {
         std::string line;
         while (std::getline(file, line)) {
+            if (separator == '|' && line.substr(10,3) != " | " && line != "date | value" ) {
+                std::cout << "Wrong db format!\n";
+                exit (1);
+            }
             std::istringstream iss(line);
             std::string key, valueStr;
             std::getline(iss, key, separator); // Use the provided separator
@@ -18,13 +22,11 @@ std::map<std::string, float> Database::Convert_To_DB(const std::string& filename
             if (key == "date " && valueStr == " value")
             {
                 std::cout << "      "<<key<<" |"<<valueStr<<"\n";
-            } else if(IsValidValue(valueStr)) {
-                // separator == ',' ? db.insert(db.begin(), std::make_pair(key, std::stof(valueStr))) : db[key] = std::stof(valueStr);
+            } else if(IsValidValue(valueStr)) { // separator == ',' ? db.insert(db.begin(), std::make_pair(key, std::stof(valueStr))) : db[key] = std::stof(valueStr);
                 if (separator == ','){
-                    db.insert(db.begin(), std::make_pair(key, std::stof(valueStr)));
-                }else {
+                    db.insert(db.end(), std::make_pair(key, std::stof(valueStr)));
+                }else if (separator == '|'){
                     db[key.substr(0, 10)] = std::stof(valueStr);
-                    // std::cout << key.substr(0, 11) << "\n";
                 }
             }
         }
@@ -43,39 +45,38 @@ void Database::Print_Result(const std::map<std::string, float>& db1, const std::
     std::map<std::string, float> result;
     float lastValue2 = 1.0; // Initialize to a default value
 
-    for (const auto& entry1 : db1) {
-        auto it = db2.find(entry1.first);
-        if (entry1.second < 0.0 || entry1.second > 1000.0){
-            std::cout << entry1.first << "  Rate is " << entry1.second << ", but it must be positive float between 0 and 1000!\n"; //check numeric range
-        }else if (!IsValidDate(entry1.first)) //check if date correct
-        {
-            std::cout << entry1.first << " wrong date format!\n";
-        }else if (it != db2.end()) {
-        {
-            std::cout << entry1.first << " | " << entry1.second << " => " << "lv:" << lastValue2 << std::fixed << std::setprecision(2) << " res: "<< entry1.second * lastValue2 << std::endl;
+    for (const auto& weights : db1) { // auto it = db2.find(weights.first); for every weight
+        if (weights.second < 0.0 || weights.second > 1000.0){ //check numeric range
+            std::cout << weights.first << "   Rate is " << weights.second << ", but it must be positive float between 0 and 1000!\n";
+            continue ;
         }
-        } else {
-            std::cout << entry1.first << " Not found!\n";
-            //find previous date
-            for (const auto& entry3 : db1) {
-                auto it = db2.find(entry3.first + " ");
-                }
-            std::cout << entry1.first << " | " << entry1.second << " => " << "lv:" << lastValue2 << std::fixed << std::setprecision(2) << " res: "<< entry1.second * lastValue2 << std::endl;
+        else if (!IsValidDate(weights.first) || weights.first == "2009-01-01") { //check if date correct
+            std::cout << weights.first << "   Wrong date!\n";
+            continue ;}      
+        for (auto prices = db2.rbegin(); prices != db2.rend(); prices++){
+                if (prices->first.compare(weights.first) <= 0) {
+                    if (prices->first.compare(weights.first) == 0) {
+                        // std::cout << "Found a match!: " << prices->first << std::endl;
+                        std::cout << weights.first << " | " << weights.second << " => " << std::fixed << std::setprecision(2) << weights.second * prices->second << std::endl;
+                    }
+                    else {
+                        // std::cout << prices->first << " prices used for " << weights.first << std::endl;
+                        std::cout << weights.first << " | " << weights.second << " => " << std::fixed << std::setprecision(2) << weights.second * prices->second << std::endl;
+                        // std::cout << "date: " << prices->first << " weight: " << weights.first << " compared: "  << prices->first.compare(weights.first) << "\n";
+                    }
+                break ;
+            }
         }
     }
-
 }
 
 bool Database::IsValidDate(const std::string& dateStr) {
-        if (dateStr.substr(4,1) != "-" || dateStr.substr(7,1) != "-" || dateStr.length() != 10) //pattern
-        {
+        if (dateStr.substr(4,1) != "-" || dateStr.substr(7,1) != "-" || dateStr.length() != 10)
             return false;
-        }
-        // std::cout << dateStr.substr(4,1) << "\n";
         int year = std::stoi(dateStr.substr(0, 4));
         int month = std::stoi(dateStr.substr(5, 2));
         int day = std::stoi(dateStr.substr(8, 2));
-        if (year < 0 || month < 0 || day < 0 || year > 3000)
+        if (year < 2008 || month < 0 || day < 0 || year > 9999)
             return false;
         if (month == 2) {
             // Leap year check: February can have 29 days.
