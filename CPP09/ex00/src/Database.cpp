@@ -21,7 +21,7 @@ std::map<std::string, float> Database::Convert_To_DB(const std::string& filename
 
             if (key == "date " && valueStr == " value")
             {
-                std::cout << "      "<<key<<" |"<<valueStr<<"\n";
+                std::cout << "      "<<key<<"|"<<valueStr<<"\n";
             } else if(IsValidValue(valueStr)) { // separator == ',' ? db.insert(db.begin(), std::make_pair(key, std::stof(valueStr))) : db[key] = std::stof(valueStr);
                 if (separator == ','){
                     db.insert(db.end(), std::make_pair(key, std::stof(valueStr)));

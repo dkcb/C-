@@ -6,9 +6,7 @@ int main(int argc, char* argv[]) {
         std::cerr << "Usage: " << argv[0] << " <input_filename>" << std::endl;
         return 1;
     }
-
     std::string inputFilename = argv[1];
-
     // Convert data from the input file to a database
     std::map<std::string, float> DB_prices = Database::Convert_To_DB("data.csv", ',');
     // std::cout << " prices size is: " << DB_prices.size() << "\n";
@@ -23,11 +21,8 @@ int main(int argc, char* argv[]) {
     }
     // Database::Print_DB(DB_prices, std::cout, 2);
     // std::cout << "---------------------\n\n\n";
-    Database::Print_DB(DB_rates, std::cout, 2);
-
-    // Merge the database with itself (as an example)
-
-    std::cout << "---------------------\n\n\n";
+    // Database::Print_DB(DB_rates, std::cout, 2);
+    // std::cout << "---------------------\n\n\n";
     // Print the merged data
     Database::Print_Result(DB_rates, DB_prices);
 
