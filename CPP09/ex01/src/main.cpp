@@ -1,29 +1,24 @@
-#include <iostream>
-#include "Span.hpp"
+#include "rpn_calculator.hpp"
 
-int main() {
-    Span span(5);
-
-    try {
-        span.addNumber(10);
-        span.addNumber(3);
-        span.addNumber(7);
-        span.addNumber(1);
-        span.addNumber(8);
-        // Adding one more number will throw an exception
-        // span.addNumber(6);
-    } catch (const std::exception& e) {
-        std::cout << "Exception: " << e.what() << std::endl;
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        // Display an error message if the number of command-line arguments is incorrect.
+        std::cerr << "Usage: " << argv[0] << " <inverted_polish_expression>\n";
+        return 1; // Return error code 1.
     }
 
+    // Initialize the RPN calculator with the provided expression.
+    RPNCalculator calculator(argv[1]);
+
     try {
-        int shortest = span.shortestSpan();
-        int longest = span.longestSpan();
-        std::cout << "Shortest span: " << shortest << std::endl;
-        std::cout << "Longest span: " << longest << std::endl;
+        // Calculate and output the result.
+        double result = calculator.calculate();
+        std::cout << "Result: " << result << std::endl;
     } catch (const std::exception& e) {
-        std::cout << "Exception: " << e.what() << std::endl;
+        // Display an error message if an exception occurs during calculation.
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 2; // Return error code 2.
     }
 
-    return 0;
+    return 0; // Return success code.
 }
