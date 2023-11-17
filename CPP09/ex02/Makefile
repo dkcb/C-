@@ -1,9 +1,9 @@
 VPATH		= ./obj:./src:
-SRC			= main.cpp
+SRC			= main.cpp pmergeme.cpp
 OBJ			= $(SRC:.cpp=.o)
-NAME		= MutantStack
-CFLAGS		= #-Wall -Werror -Wextra -std=c++98 \
-# -g3 -fsanitize=address
+NAME		= PmergeMe
+CFLAGS		= -Wall -Werror -Wextra \
+-g3 -fsanitize=address
 
 all:		$(NAME)
 
@@ -11,7 +11,7 @@ $(NAME):	$(OBJ)
 			$(CXX) $(CFLAGS) $(OBJ) -o $(NAME)
 
 run:		$(NAME)
-			./$(NAME) "input.txt | cat > 2.txt"
+			./$(NAME) "3" "1" "6" "2"
 
 %.o: %.cpp
 	$(CXX) $(CFLAGS) -c $<

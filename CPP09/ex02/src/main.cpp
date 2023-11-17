@@ -1,18 +1,35 @@
+#include "pmergeme.hpp"
 #include <iostream>
-#include "MutantStack.hpp"
+#include <vector>
+#include <deque>
+#include <ctime>
 
+// int main(int argc, char **argv) {
 int main() {
-    MutantStack<int> mutantStack;
+    // Create an instance of PmergeMe
+    PmergeMe pmergeMe;
 
-    mutantStack.push(1);
-    mutantStack.push(2);
-    mutantStack.push(3);
-    mutantStack.push(4);
-    mutantStack.push(5);
+    // Example sequence with at least 3000 different integers
+    std::vector<int> sequence;// = { 2, 1, 8, 5 };
+    std::srand(std::time(0)); // Seed for random number generation
 
-    std::cout << "MutantStack contents: ";
-    for (MutantStack<int>::iterator it = mutantStack.begin(); it != mutantStack.end(); ++it) {
-        std::cout << *it << " ";
+    for (int i = 0; i < 30; ++i) {
+        sequence.push_back(std::rand() % 100); // Assuming integers in the range [0, 99]
+    }
+    std::cout << "Sequence size: " << sequence.size() << "\n";
+
+    // Display the unsorted sequence
+    std::cout << "Unsorted Sequence:" << std::endl;
+    for (const auto& num : sequence) {
+        std::cout << num << " ";
+    }
+    // Sort the sequence using PmergeMe
+    pmergeMe.sortSequence(sequence);
+
+    // Display the sorted sequence
+    std::cout << "Sorted Sequence:" << std::endl;
+    for (const auto& num : sequence) {
+        std::cout << num << " ";
     }
     std::cout << std::endl;
 
