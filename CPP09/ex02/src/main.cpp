@@ -13,8 +13,8 @@ int main() {
     std::vector<int> sequence;// = { 2, 1, 8, 5 };
     std::srand(std::time(0)); // Seed for random number generation
 
-    for (int i = 0; i < 30; ++i) {
-        sequence.push_back(std::rand() % 100); // Assuming integers in the range [0, 99]
+    for (int i = 0; i < 3000; ++i) {
+        sequence.push_back(std::rand() % 10); // Assuming integers in the range [0, 99]
     }
     std::cout << "Sequence size: " << sequence.size() << "\n";
 
@@ -24,10 +24,10 @@ int main() {
         std::cout << num << " ";
     }
     // Sort the sequence using PmergeMe
-    pmergeMe.sortSequence(sequence);
+    PmergeMe::sortSequence(sequence);
 
     // Display the sorted sequence
-    std::cout << "Sorted Sequence:" << std::endl;
+    std::cout << "\nSorted Sequence:" << std::endl;
     for (const auto& num : sequence) {
         std::cout << num << " ";
     }
