@@ -27,7 +27,7 @@ int Span::shortestSpan() const {
     }
     std::vector<int> sortedNumbers = numbers;
     std::sort(sortedNumbers.begin(), sortedNumbers.end());
-    int minSpan = std::numeric_limits<int>::max();
+    int minSpan = 2147483647;
     for (size_t i = 1; i < sortedNumbers.size(); ++i) {
         int span = sortedNumbers[i] - sortedNumbers[i - 1];
         if (span < minSpan) {
