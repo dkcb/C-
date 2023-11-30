@@ -10,6 +10,10 @@ std::map<std::string, float> Database::Convert_To_DB(const std::string& filename
     if (file.is_open()) {
         std::string line;
         while (std::getline(file, line)) {
+            if (!line[0]){
+                std::cout << "Wrong db format!\n";
+                exit (1);
+            }
             if (separator == '|' && line.substr(10,3) != " | " && line != "date | value" ) {
                 std::cout << "Wrong db format!\n";
                 exit (1);
@@ -19,6 +23,7 @@ std::map<std::string, float> Database::Convert_To_DB(const std::string& filename
             std::getline(iss, key, separator); // Use the provided separator
             std::getline(iss, valueStr, separator);
 
+            std::cout << valueStr[1] << " 1V[0]\n";
             if (key == "date " && valueStr == " value")
             {
                 std::cout << "      "<<key<<"|"<<valueStr<<"\n";
@@ -26,6 +31,11 @@ std::map<std::string, float> Database::Convert_To_DB(const std::string& filename
                 if (separator == ','){
                     db.insert(db.end(), std::make_pair(key, std::stof(valueStr)));
                 }else if (separator == '|'){
+                    std::cout << valueStr[1] << " 2V[0]\n";
+                    if (valueStr[1] == '\0'){
+                        std::cout << "Wrong db format!\n";
+                        exit(1);
+                    }
                     db[key.substr(0, 10)] = std::stof(valueStr);
                 }
             }
@@ -72,7 +82,7 @@ bool Database::IsValidDate(const std::string& dateStr) {
         int year = std::stoi(dateStr.substr(0, 4));
         int month = std::stoi(dateStr.substr(5, 2));
         int day = std::stoi(dateStr.substr(8, 2));
-        if (year < 2008 || month < 0 || day < 0 || year > 9999)
+        if (year < 2008 || month < 1 || month > 12 || day < 1 || year > 9999)
             return false;
         if (month == 2) {
             // Leap year check: February can have 29 days.
