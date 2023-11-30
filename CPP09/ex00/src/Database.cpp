@@ -35,7 +35,7 @@ std::map<std::string, float> Database::Convert_To_DB(const std::string& filename
     return db;
 }
 
-void Database::Print_DB(const std::map<std::string, float>& db, std::ostream& output, int elementsToPrint) {
+void Database::Print_DB(const std::map<std::string, float>& db, std::ostream& output) {
     for (const auto& entry : db) {
         output << entry.first << " | " << std::fixed << std::setprecision(2) << entry.second << "\n";
     }
@@ -43,7 +43,6 @@ void Database::Print_DB(const std::map<std::string, float>& db, std::ostream& ou
 
 void Database::Print_Result(const std::map<std::string, float>& db1, const std::map<std::string, float>& db2) {
     std::map<std::string, float> result;
-    float lastValue2 = 1.0; // Initialize to a default value
 
     for (const auto& weights : db1) { // auto it = db2.find(weights.first); for every weight
         if (weights.second < 0.0 || weights.second > 1000.0){ //check numeric range
@@ -56,13 +55,10 @@ void Database::Print_Result(const std::map<std::string, float>& db1, const std::
         for (auto prices = db2.rbegin(); prices != db2.rend(); prices++){
                 if (prices->first.compare(weights.first) <= 0) {
                     if (prices->first.compare(weights.first) == 0) {
-                        // std::cout << "Found a match!: " << prices->first << std::endl;
                         std::cout << weights.first << " | " << weights.second << " => " << std::fixed << std::setprecision(2) << weights.second * prices->second << std::endl;
                     }
                     else {
-                        // std::cout << prices->first << " prices used for " << weights.first << std::endl;
                         std::cout << weights.first << " | " << weights.second << " => " << std::fixed << std::setprecision(2) << weights.second * prices->second << std::endl;
-                        // std::cout << "date: " << prices->first << " weight: " << weights.first << " compared: "  << prices->first.compare(weights.first) << "\n";
                     }
                 break ;
             }
@@ -99,7 +95,10 @@ bool Database::IsValidDate(const std::string& dateStr) {
 
 bool Database::IsValidValue(const std::string& value) {
     try {
-        float floatValue = std::stof(value);
+        float floatValue;
+        floatValue = std::stof(value);
+        if (!floatValue)
+            return (0);
         return (1);
     }
     catch (const std::exception& e) {

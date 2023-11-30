@@ -2,8 +2,8 @@ VPATH		= ./obj:./src:
 SRC			= main.cpp Database.cpp
 OBJ			= $(SRC:.cpp=.o)
 NAME		= btc
-CFLAGS		= #-Wall -Werror -Wextra -std=c++98 \
-# -g3 -fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra \
+ -g3 -fsanitize=address
 
 all:		$(NAME)
 

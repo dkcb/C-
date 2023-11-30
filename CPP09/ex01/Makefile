@@ -2,8 +2,8 @@ VPATH		= ./obj:./src:
 SRC			= main.cpp rpn_calculator.cpp
 OBJ			= $(SRC:.cpp=.o)
 NAME		= RPN
-CFLAGS		= #-Wall -Werror -Wextra -std=c++98 \
-# -g3 -fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra \
+ -g3 -fsanitize=address
 
 all:		$(NAME)
 
