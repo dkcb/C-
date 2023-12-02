@@ -10,34 +10,43 @@ std::map<std::string, float> Database::Convert_To_DB(const std::string& filename
     if (file.is_open()) {
         std::string line;
         while (std::getline(file, line)) {
-            if (!line[0]){
-                std::cout << "Wrong db format!\n";
-                exit (1);
+
+            if ((!line[0] || !line[13] || line.length() < 3 || line.length() > (23 + (line[13] == '-'))) && separator == '|' && line != "date | value"){
+                    std::cout << "Error value in: " << line << " is not a float or integer\n";
+                    exit (1);
             }
-            if (separator == '|' && line.substr(10,3) != " | " && line != "date | value" ) {
-                std::cout << "Wrong db format!\n";
-                exit (1);
+            if (line != "date | value" && separator != ',') {
+                if (separator == '|' && line.substr(10,3) == " | "){
+                    size_t dotCount = 0;
+                    size_t signCount = 0;
+                  
+                    for (char c : line.substr(13)){
+                        if (!isdigit(c)){
+                            if ((line[14] && c == '+' && line[13] == '+' && isdigit(line[14])) || (line[14] && c == '-' && (line[13] == '-') && !signCount && isdigit(line[14]))){
+                                signCount++;
+                                continue ;
+                            }
+                            if (c == '.'  && !dotCount){
+                                dotCount++;
+                                continue ;
+                            }
+                            std::cout << "Error value in: " << line << " is not a float or integer\n";
+                            exit (1);
+                        }
+                    }
+                }
             }
             std::istringstream iss(line);
             std::string key, valueStr;
-            std::getline(iss, key, separator); // Use the provided separator
+            std::getline(iss, key, separator);
             std::getline(iss, valueStr, separator);
-
-            std::cout << valueStr[1] << " 1V[0]\n";
-            if (key == "date " && valueStr == " value")
-            {
+            if (key == "date " && valueStr == " value"){
                 std::cout << "      "<<key<<"|"<<valueStr<<"\n";
-            } else if(IsValidValue(valueStr)) { // separator == ',' ? db.insert(db.begin(), std::make_pair(key, std::stof(valueStr))) : db[key] = std::stof(valueStr);
-                if (separator == ','){
+            }else if(IsValidValue(valueStr)) { // separator == ',' ? db.insert(db.begin(), std::make_pair(key, std::stof(valueStr))) : db[key] = std::stof(valueStr);
+                if (separator == ',')
                     db.insert(db.end(), std::make_pair(key, std::stof(valueStr)));
-                }else if (separator == '|'){
-                    std::cout << valueStr[1] << " 2V[0]\n";
-                    if (valueStr[1] == '\0'){
-                        std::cout << "Wrong db format!\n";
-                        exit(1);
-                    }
-                    db[key.substr(0, 10)] = std::stof(valueStr);
-                }
+                else if (separator == '|')
+                    db[key.substr(0, 10)] = std::stof(valueStr.substr(1));
             }
         }
         file.close();
@@ -114,4 +123,24 @@ bool Database::IsValidValue(const std::string& value) {
     catch (const std::exception& e) {
         return false;
     }
+}
+
+bool isValidFloat(const std::string& str) {
+    size_t dotCount = 0;
+
+    for (char c : str) {
+        if (isdigit(c)) {
+            // Continue to the next iteration
+        } else if (c == '.') {
+            // Check if there is only one dot in the string
+            if (++dotCount > 1) {
+                return false;
+            }
+        } else {
+            // Character is not a digit or dot, invalid float
+            return false;
+        }
+    }
+
+    return true;
 }
