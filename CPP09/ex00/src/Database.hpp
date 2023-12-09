@@ -8,7 +8,8 @@
 
 class Database {
 public:
-    static std::map<std::string, float> Convert_To_DB(const std::string& filename, const char separator);
+    static std::map<std::string, float> Convert_To_DB_data(const std::string& filename);
+    static std::map<std::string, float> Convert_To_DB_weights(const std::string& filename);
     static void Print_DB(const std::map<std::string, float>& db, std::ostream& output);
     static void Print_Result(const std::map<std::string, float>& db1, const std::map<std::string, float>& db2);
     static bool IsValidValue(const std::string& value);

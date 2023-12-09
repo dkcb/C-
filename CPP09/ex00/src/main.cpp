@@ -8,9 +8,9 @@ int main(int argc, char* argv[]) {
     }
     std::string inputFilename = argv[1];
     // Convert data from the input file to a database
-    std::map<std::string, float> DB_prices = Database::Convert_To_DB("data.csv", ',');
+    std::map<std::string, float> DB_prices = Database::Convert_To_DB_data("data.csv");
     // std::cout << " prices size is: " << DB_prices.size() << "\n";
-    std::map<std::string, float> DB_rates = Database::Convert_To_DB(argv[1], '|');
+    std::map<std::string, float> DB_rates = Database::Convert_To_DB_weights(argv[1]);
     if (DB_prices.empty()) {
         std::cerr << "Failed to read data from the prices file." << std::endl;
         return 1;

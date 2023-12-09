@@ -3,58 +3,57 @@
 #include <sstream>
 #include <iomanip>
 
-std::map<std::string, float> Database::Convert_To_DB(const std::string& filename, char separator) {
+std::map<std::string, float> Database::Convert_To_DB_data(const std::string& filename) {
     std::map<std::string, float> db;
     std::ifstream file(filename);
 
     if (file.is_open()) {
         std::string line;
         while (std::getline(file, line)) {
-            if ((!line[0] || !line[13] || line.length() < 3 || line.length() > (23 + (line[13] == '-'))) && separator == '|' && line != "date | value"){
+            if(line != "date,exchange_rate") // ',' == ',' ? db.insert(db.begin(), std::make_pair(key, std::stof(valueStr))) : db[key] = std::stof(valueStr);
+                db.insert(db.end(), std::make_pair(line.substr(0, 10), std::stof(line.substr(11))));
+        }
+        file.close();
+    }
+    return db;
+}
+
+std::map<std::string, float> Database::Convert_To_DB_weights(const std::string& filename) {
+    std::map<std::string, float> db;
+    std::ifstream file(filename);
+
+    if (file.is_open()) {
+        std::string line;
+        
+        while (std::getline(file, line)) {
+            if (line.length() < 10){
+                std::cout << "Wrong format in: |" << line << "|!\n";
+                exit (1);}
+            if (line.substr(10, 3) != " | " || (line.length() > 23 && line[13] != '+' && line[13] != '-')){
+                if (line == "date | value"){
+                    std::cout << "      date | value\n";
+                    continue ;}
+                    std::cout << "Wrong format in: |" << line << "|!\n";
+                    exit (1);
+            }else{
+            size_t dotCount = 0;
+            size_t signCount = 0;
+            
+            for (char c : line.substr(13)){ //check if value is float or int
+                if (!isdigit(c)){
+                    if ((line[14] && c == '+' && line[13] == '+' && isdigit(line[14])) || (line[14] && c == '-' && (line[13] == '-') && !signCount && isdigit(line[14]))){
+                        signCount++;
+                        continue ;
+                    }
+                    if (c == '.'  && !dotCount){
+                        dotCount++;
+                        continue ;
+                    }
                     std::cout << "Error value in: " << line << " is not a float or integer\n";
                     exit (1);
-            }
-            if (line != "date | value" && separator != ',') {
-                if (separator == '|' && line.substr(10,3) == " | "){
-                    size_t dotCount = 0;
-                    size_t signCount = 0;
-                  
-                    for (char c : line.substr(13)){
-                        if (!isdigit(c)){
-                            if ((line[14] && c == '+' && line[13] == '+' && isdigit(line[14])) || (line[14] && c == '-' && (line[13] == '-') && !signCount && isdigit(line[14]))){
-                                signCount++;
-                                continue ;
-                            }
-                            if (c == '.'  && !dotCount){
-                                dotCount++;
-                                continue ;
-                            }
-                            std::cout << "Error value in: " << line << " is not a float or integer\n";
-                            exit (1);
-                        }
-                    }
                 }
             }
-            std::istringstream iss(line);
-            std::string key, valueStr;
-            std::getline(iss, key, separator);
-            std::getline(iss, valueStr, separator);
-            // std::cout << "Line: " << line << "  key:" <<key<< "  value: " <<valueStr<<"\n";
-            if (key == "date " && valueStr == " value"){
-                std::cout << "      "<<key<<"|"<<valueStr<<"\n";
-                continue ;
-            }else if(line != "date,exchange_rate") { // separator == ',' ? db.insert(db.begin(), std::make_pair(key, std::stof(valueStr))) : db[key] = std::stof(valueStr);
-                if (separator == ','){
-                    
-                    db.insert(db.end(), std::make_pair(key, std::stof(valueStr)));
-                }
-                else if (separator == '|'){
-                    // std::cout << "Written key:" <<key.substr(0, 10)<< "  value: " <<std::stof(valueStr.substr(1))<<"\n";
-                    db[key.substr(0, 10)] = std::stof(valueStr.substr(1));
-                }
-                
-                
-            }
+            db.insert(db.end(), std::make_pair(line.substr(0, 10), std::stof(line.substr(13))));}
         }
         file.close();
     }
@@ -72,11 +71,11 @@ void Database::Print_Result(const std::map<std::string, float>& db1, const std::
 
     for (const auto& weights : db1) { // auto it = db2.find(weights.first); for every weight
         if (weights.second < 0.0 || weights.second > 1000.0){ //check numeric range
-            std::cout << weights.first << "   Rate is " << weights.second << ", but it must be positive float between 0 and 1000!\n";
+            std::cout << weights.first << " | Rate is " << weights.second << ", but it must be positive float between 0 and 1000!\n";
             continue ;
         }
         else if (!IsValidDate(weights.first) || weights.first == "2009-01-01") { //check if date correct
-            std::cout << weights.first << "   Wrong date!\n";
+            std::cout << weights.first << " | Wrong date!\n";
             continue ;}      
         for (auto prices = db2.rbegin(); prices != db2.rend(); prices++){
             if (prices->first.compare(weights.first) <= 0) {
