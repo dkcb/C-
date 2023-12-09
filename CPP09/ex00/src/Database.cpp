@@ -10,7 +10,6 @@ std::map<std::string, float> Database::Convert_To_DB(const std::string& filename
     if (file.is_open()) {
         std::string line;
         while (std::getline(file, line)) {
-
             if ((!line[0] || !line[13] || line.length() < 3 || line.length() > (23 + (line[13] == '-'))) && separator == '|' && line != "date | value"){
                     std::cout << "Error value in: " << line << " is not a float or integer\n";
                     exit (1);
@@ -40,13 +39,21 @@ std::map<std::string, float> Database::Convert_To_DB(const std::string& filename
             std::string key, valueStr;
             std::getline(iss, key, separator);
             std::getline(iss, valueStr, separator);
+            // std::cout << "Line: " << line << "  key:" <<key<< "  value: " <<valueStr<<"\n";
             if (key == "date " && valueStr == " value"){
                 std::cout << "      "<<key<<"|"<<valueStr<<"\n";
-            }else if(IsValidValue(valueStr)) { // separator == ',' ? db.insert(db.begin(), std::make_pair(key, std::stof(valueStr))) : db[key] = std::stof(valueStr);
-                if (separator == ',')
+                continue ;
+            }else if(line != "date,exchange_rate") { // separator == ',' ? db.insert(db.begin(), std::make_pair(key, std::stof(valueStr))) : db[key] = std::stof(valueStr);
+                if (separator == ','){
+                    
                     db.insert(db.end(), std::make_pair(key, std::stof(valueStr)));
-                else if (separator == '|')
+                }
+                else if (separator == '|'){
+                    // std::cout << "Written key:" <<key.substr(0, 10)<< "  value: " <<std::stof(valueStr.substr(1))<<"\n";
                     db[key.substr(0, 10)] = std::stof(valueStr.substr(1));
+                }
+                
+                
             }
         }
         file.close();
@@ -72,14 +79,9 @@ void Database::Print_Result(const std::map<std::string, float>& db1, const std::
             std::cout << weights.first << "   Wrong date!\n";
             continue ;}      
         for (auto prices = db2.rbegin(); prices != db2.rend(); prices++){
-                if (prices->first.compare(weights.first) <= 0) {
-                    if (prices->first.compare(weights.first) == 0) {
-                        std::cout << weights.first << " | " << weights.second << " => " << std::fixed << std::setprecision(2) << weights.second * prices->second << std::endl;
-                    }
-                    else {
-                        std::cout << weights.first << " | " << weights.second << " => " << std::fixed << std::setprecision(2) << weights.second * prices->second << std::endl;
-                    }
-                break ;
+            if (prices->first.compare(weights.first) <= 0) {
+                    std::cout << weights.first << " | " << weights.second << " => " << std::fixed << std::setprecision(2) << weights.second * prices->second << std::endl;
+            break ;
             }
         }
     }
@@ -91,7 +93,7 @@ bool Database::IsValidDate(const std::string& dateStr) {
         int year = std::stoi(dateStr.substr(0, 4));
         int month = std::stoi(dateStr.substr(5, 2));
         int day = std::stoi(dateStr.substr(8, 2));
-        if (year < 2008 || month < 1 || month > 12 || day < 1 || year > 9999)
+        if (year < 2009 || month < 1 || month > 12 || day < 1 || year > 9999)
             return false;
         if (month == 2) {
             // Leap year check: February can have 29 days.
